@@ -1,0 +1,25 @@
+/* Source of library styling, incl. course notes:
+react-gallery-wrapper
+*/
+
+@use "./styles/variables.module.scss" as *;
+
+/* #region Library styling for App() */
+/* This is a <div> element inside of body in index.html.
+It is where the App component is rendered. This styling is specific to that div, so it has to be applied to the App component
+from the file App.scss. It is the global styles that are supposed to be declared in main.scss.
+*/
+#rootByMariePierreLessard {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    min-height: 100vh;
+}
+
+/* #endregion Library styling */
+
+/* #region Project-specific styling goes here (overriding library styling) */
+
+
+
+/* #endregion Project-specific styling */

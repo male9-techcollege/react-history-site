@@ -1,0 +1,208 @@
+/* Source of library styling, incl. course notes:
+react-gallery-wrapper
+*/
+
+@use "../../../styles/variables.module.scss" as *;
+@use "../../../styles/mixins.module.scss" as *;
+
+/* #region Library styling (basic, with responsiveness) */
+.responsiveGridWoPassePartoutByMariePierreLessard {
+    @include gridMobilesWRegGapByMariePierreLessard;
+    margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
+}
+
+@media (min-width: 768px) {
+    .responsiveGridWoPassePartoutByMariePierreLessard {
+        @include gridTabletsWRegGapByMariePierreLessard;
+    }
+}
+
+.unresponsiveGridWoPassePartoutByMariePierreLessard {
+    @include gridMobilesWRegGapByMariePierreLessard;
+    margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
+}
+
+.responsiveGridWPassePartoutByMariePierreLessard {
+    @include gridMobilesWRegGapByMariePierreLessard;
+    padding: $size-reg-spacing-by-Marie-Pierre-Lessard;
+    background-color: $clr-bg-passe-partout-by-Marie-Pierre-Lessard;
+}
+
+@media (min-width: 768px) {
+    .responsiveGridWPassePartoutByMariePierreLessard {
+        @include gridTabletsWRegGapByMariePierreLessard;
+    }
+}
+
+/* #endregion Library styling (basic, with responsiveness) */
+
+/* #region Project-specific styling goes here (overriding library styling) */
+/* The grid without passe-partout is in exercise 1. */
+.responsiveGridWoPassePartoutByMariePierreLessard {
+    /* Override */
+    grid-template-rows: repeat(2, 100vh); //Replacing auto because of the giant pictures
+}
+
+@media (min-width: 768px) {
+    .responsiveGridWoPassePartoutByMariePierreLessard {
+        /* Override */
+        grid-template-rows: 90vh; //Replacing auto because of the giant pictures
+    }
+}
+
+/* The grid with passe-partout is in exercise 2. */
+.responsiveGridWPassePartoutByMariePierreLessard {
+    /* Override */
+    grid-template-rows: repeat(4, 88vh); //Replacing auto because the positioned footer is over the body with auto
+}
+
+@media (min-width: 375px) {
+    .responsiveGridWPassePartoutByMariePierreLessard {
+        /* Override */
+        grid-template-rows: repeat(4, 75vh); //Replacing auto because the positioned footer is over the body with auto 
+    }
+}
+
+@media (min-width: 425px) {
+    .responsiveGridWPassePartoutByMariePierreLessard {
+        /* Override */
+        grid-template-rows: repeat(4, 60vh); //Replacing auto because the positioned footer is over the body with auto 
+    }
+}
+
+@media (min-width: 768px) {
+    .responsiveGridWPassePartoutByMariePierreLessard {
+        /* Override */
+        grid-template-rows: repeat(2, 65vh); //Replacing auto because the positioned footer is over the body with auto 
+    }
+}
+
+@media (min-width: 1440px) {
+    .responsiveGridWPassePartoutByMariePierreLessard {
+        /* Override */
+        grid-template-rows: repeat(2, 45vh); //Replacing auto because the positioned footer is over the body with auto 
+    }
+}
+
+/* Stopwatch exercise: this is based on .unresponsiveGridWoPassePartoutByMariePierreLessard 
+Maybe TO DO: I am not sure what parts of this I would want to use in a SCSS library, e.g. as mixins, or what their general
+purpose and thereby their name should be. I need to move on to other assignments. */
+.widgetCardByMariePierreLessard {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: $size-grx4-rem-by-Marie-Pierre-Lessard $size-gr-rem-by-Marie-Pierre-Lessard;
+    margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
+
+    max-width: 280px;
+    margin-inline: auto;
+
+    div {
+        text-align: center;
+        align-content: center;
+        font-size: $size-gr-rem-by-Marie-Pierre-Lessard;
+        border-top: 2px solid $clr-2-by-Marie-Pierre-Lessard;
+        border-left: 2px solid $clr-2-by-Marie-Pierre-Lessard;
+        border-right: 2px solid $clr-2-by-Marie-Pierre-Lessard;
+    }
+}
+
+/* Form exercise: this is based on .unresponsiveGridWoPassePartoutByMariePierreLessard 
+Maybe TO DO: I am not sure what parts of this I would want to use in a SCSS library, e.g. as mixins, or what their general
+purpose and thereby their name should be. I need to move on to other assignments. */
+.formGridByMariePierreLessard {
+    /* Based on responsiveGridWoPassePartoutByMariePierreLessard, but I need the height to be auto */
+    @include gridMobilesWRegGapByMariePierreLessard;
+    margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
+
+    .fieldsetByMariePierreLessard {
+        margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: $size-reg-spacing-by-Marie-Pierre-Lessard;
+
+        .radioBtnGroupByMariePierreLessard {
+            label {
+                padding-inline: $size-reg-spacing-by-Marie-Pierre-Lessard;
+            }
+        }
+
+        .inputGroupByMariePierreLessard {
+            display: grid;
+            grid-template-columns: 1.2fr 2.8fr;
+            gap: $size-reg-spacing-by-Marie-Pierre-Lessard;
+
+            input {
+                font-family: $font-fam-root-w-fallbacks-by-Marie-Pierre-Lessard;
+            }
+
+            span {
+                /* Source: css-grid assignment, Aarhus Tech */
+                grid-column: span 2;
+                color: $clr-warning-by-Marie-Pierre-Lessard;
+            }
+        }
+
+        .textAreaGroupByMariePierreLessard {
+            textarea {
+                display: block;
+                width: 100%;
+                margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
+                font-family: $font-fam-root-w-fallbacks-by-Marie-Pierre-Lessard;
+            }
+
+            span {
+                /* Source: css-grid assignment, Aarhus Tech */
+                grid-column: span 2;
+                color: $clr-warning-by-Marie-Pierre-Lessard;
+            }
+        }
+    }
+
+    .viewerByMariePierreLessard {
+        margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
+        background-color: $clr-4-by-Marie-Pierre-Lessard;
+
+        .attentionByMariePierreLessard {
+            text-decoration: underline;
+            margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .formGridByMariePierreLessard {
+        @include gridTabletsWRegGapByMariePierreLessard;
+    }
+}
+
+/* Used for stopwatch and form */
+.btnX2GroupByMariePierreLessard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+
+    button {
+        font-size: $size-1rem-by-Marie-Pierre-Lessard;
+        height: $size-gr-rem-by-Marie-Pierre-Lessard;
+        padding-inline: $size-third-rem-by-Marie-Pierre-Lessard;
+        background-color: $clr-3-by-Marie-Pierre-Lessard;
+    }
+
+    button:hover {
+        background-color: $clr-5-by-Marie-Pierre-Lessard;
+    }
+
+    button:focus {
+        background-color: $clr-1-by-Marie-Pierre-Lessard;
+        border: 3px solid $clr-2-by-Marie-Pierre-Lessard;
+        outline: 1px solid $clr-2-by-Marie-Pierre-Lessard;
+        outline-offset: 2px;
+    }
+
+    button:active {
+        background-color: $clr-5-by-Marie-Pierre-Lessard;
+    }
+
+}
+
+/* #endregion Project-specific styling */

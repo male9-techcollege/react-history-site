@@ -1,0 +1,126 @@
+/* Source of library styling, incl. course notes:
+react-gallery-wrapper
+*/
+
+@use "../../styles/variables.module.scss" as *;
+
+/* #region Library styling (basic) */
+.gHeaderByMariePierreLessard {
+    background-color: $clr-bg-globalheader-by-Marie-Pierre-Lessard;
+    min-height: $size-minimum-dev-by-Marie-Pierre-Lessard;
+}
+
+/* #endregion Library styling (basic) */
+
+/* #region Project-specific styling goes here (overriding library styling) */
+
+/* Calculations based on Figma layout
+On tablets acc. to Dev Tools (Figma design says mobiles, but that is too wide to fit on mobiles): 
+Hero height (on all devices acc. to Figma): 800px
+Plate height including border: 401px (border: 24px)
+Plate width including border: 665px (border: 24px)
+Plate position: not offset, centered, about half as much air at the bottom as at the top 
+
+On larger devices: 
+Hero height (on all devices acc. to Figma): 800px
+Plate height including border: 452px (border: 24px)
+Plate width including border: 1154px (border: 24px)
+Plate position: offset by about a fifth of the plate height, centered
+
+TO DO: the following is tablet-first not mobile-first due to measurements on Figma! 
+*/
+
+.gHeaderByMariePierreLessard {
+    background-color: $clr-4-by-Marie-Pierre-Lessard;
+    min-height: 800px; // Override 
+
+    .heroAreaByMariePierreLessard {
+        /* The h1 is positioned absolutely over this background */
+        position: relative;
+        background-image: url("../../src/assets/img/mr-cup-fabien-barral-Fo5dTm6ID1Y-unsplash.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        /* In case the background image doesn't show */
+        background-color: $clr-4-by-Marie-Pierre-Lessard;
+
+        /* Since text inside section is positioned absolutely, the section collapses unless a height is set. */
+        height: 800px;
+
+        hgroup {
+            height: 401px; // OK from 768px
+            width: 665px; // OK from 768px
+
+            /* With top: 25%; the top of the element is positioned n% away from the top.
+            With bottom: 25%; the bottom of the element is positioned n% away from the bottom. */
+            position: absolute;
+            left: 50%;
+            top: 55%;
+            transform: translateX(-50%) translateY(-45%);
+
+            background-color: $clr-5-by-Marie-Pierre-Lessard;
+            border: 24px solid $clr-4-by-Marie-Pierre-Lessard;
+            color: $clr-3-by-Marie-Pierre-Lessard;
+
+            /* Leo lov TO DO
+            */
+            padding-block: 0.4vw 0;
+            padding-inline: 1vw;
+
+            h1 {
+                /* TO DO sizes */
+                /* letter-spacing: .1rem; */
+                font-size: 2.4rem; //Override 
+                line-height: 2.4rem;
+                margin-block-start: 100px; //Override
+                margin-block-end: 0; //Override
+                margin-inline: 0;
+                text-align: center;
+            }
+
+            @media (min-width: 768px) {
+                h1 {
+                    font-size: 6vw; //Override 
+                    line-height: 6vw;
+                }
+            }
+
+            p {
+                text-align: center;
+                margin-block-start: 70px;
+                margin-inline: 130px;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            hgroup {
+                height: 452px; // OK from about 1440px
+                width: 1154px; // OK from about 1440px
+
+                /* Tim says that it is better to use a position in % (e.g. bottom: -10%) or sth over 100% (e.g. top: 100%) 
+                than to set a fixed negative margin to place something partly outside of a container. The percentage is responsive. 
+                E.g of fixed negative margin: margin-top: -8rem; 
+                */
+                top: 55%;
+                transform: translateX(-50%) translateY(0%);
+            }
+        }
+    }
+}
+
+// TO DO improve breakpoints to make this mobile-first
+// @media (min-width: 768px) {
+//     .gHeaderByMariePierreLessard {
+
+//     }
+// }
+
+/* The margin of the global header creates the air between the offset title box and the nav
+Only exists on desktops */
+@media (min-width: 1440px) {
+    .gHeaderByMariePierreLessard {
+        margin-bottom: 130px;
+    }
+}
+
+/* #endregion Project-specific styling */

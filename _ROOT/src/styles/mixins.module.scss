@@ -1,0 +1,110 @@
+/* Source of library styling, incl. course notes:
+react-gallery-wrapper
+*/
+
+@use "./variables.module.scss" as *;
+
+/* IMPORTANT REMINDER: 
+ALTERNATIVE TO PROJECT-SPECIFIC MIXINS, i.e. overriding library mixins: 
+In projects where mixins need to be overridden in multiple ways depending on the list/grid/flex container/etc., 
+it is probably best, in most cases, to override them below the @use rule in the scope of a selector instead of creating 
+additional mixins here.
+EXAMPLE: 
+The so-called regular gap defined for the project in the variables partial/module 
+(i.e. the only or most commonly encountered gap in the project) 
+may not be used in every scope where a mixin is @used.
+For instance, there could be gap of 0 (no gap) everywhere, except for one or two grids. Instead of creating multiple
+project-specific mixins here, it is probably fastest and more readable/maintainable to @use the library mixin
+(with the regular gap) in all grids, while overriding this regular gap in these one or two grids by declaring 
+the grid-specific gap under the @use rule in the scope of the selector for these exception grids. 
+*/
+
+/* #region Library mixins for lists (edited version of what I had in react-pros-and-cons (= multiple assignments)) */
+/* reset-list and a portion of horizontal-list are taken from https: //sass-lang.com/documentation/at-rules/mixin */
+@mixin resetListByMariePierreLessard {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+@mixin horizontalListByMariePierreLessard {
+    @include resetListByMariePierreLessard;
+
+    display: flex;
+    flex-direction: row;
+    gap: $size-reg-spacing-by-Marie-Pierre-Lessard;
+}
+
+@mixin verticalListByMariePierreLessard {
+    @include resetListByMariePierreLessard;
+
+    display: flex;
+    flex-direction: column;
+    gap: $size-reg-spacing-by-Marie-Pierre-Lessard;
+}
+
+/* I found list-style-position by going through the suggestions of Visual Studio Code. */
+@mixin listAgainstLeftMarginByMariePierreLessard {
+    list-style-position: inside; // This aligns the bullets vertically with the left-edge of the text.
+}
+
+@mixin indentedListByMariePierreLessard {
+    list-style-position: inside; // This aligns the bullets vertically with the left-edge of the text.
+    text-indent: $size-reg-spacing-by-Marie-Pierre-Lessard; // This indents the text, not the bullets, but if the bullets are positioned inside, they move to stay close to the text.
+}
+/* #endregion Library mixins for lists */
+
+/* #region Project-specific mixins for lists go here (overriding library mixins + more) */
+
+
+
+/* #endregion Project-specific mixins for lists */
+
+/* #region Library mixins for grids */
+@mixin gridMobilesWRegGapByMariePierreLessard {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Interestingly, grid-template-rows: auto; doesn't work in a grid with a bottom row that is an inner grid with buttons in it.
+    With the automatic sizing, that row doesn't necessarily have the same height as the button group/inner grid
+    when I set a fixed height to the buttons.
+    Result: the appearance of extra padding. */
+    grid-template-rows: auto;
+    gap: $size-reg-spacing-by-Marie-Pierre-Lessard;
+}
+
+@mixin gridTabletsWRegGapByMariePierreLessard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: $size-reg-spacing-by-Marie-Pierre-Lessard;
+}
+/* #endregion Library mixins for grids */
+
+/* #region Project-specific mixins for grids go here (overriding library mixins + more) */
+
+
+
+/* #endregion Project-specific mixins for grids */
+
+/* #region Library mixins for flex containers */
+@mixin flexContainerMobilesWRegGapAndCenteringByMariePierreLessard {
+    display: flex;
+    flex-direction: column;
+    gap: $size-reg-spacing-by-Marie-Pierre-Lessard;
+    align-items: center;
+}
+
+@mixin flexContainerTabletsWRegGapAndCenteringByMariePierreLessard {
+    display: flex;
+    flex-direction: row;
+    gap: $size-reg-spacing-by-Marie-Pierre-Lessard;
+    align-items: center;
+}
+/* #endregion Library mixins for flex containers */
+
+/* #region Project-specific mixins for flex containers go here (overriding library mixins+more) */
+
+
+
+/* #endregion Project-specific mixins for flex containers */
+

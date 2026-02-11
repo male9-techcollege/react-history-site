@@ -1,0 +1,85 @@
+/* Source of library styling, incl. course notes:
+react-gallery-wrapper
+react-leo-lov, which was based on La Cuisine
+*/
+
+@use "./styles/variables.module.scss" as *;
+
+/* #region Library styling (applied globally) */
+/* Universal selector */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* HTML element */
+:root {
+    font-family: $font-fam-root-w-fallbacks-by-Marie-Pierre-Lessard;
+    font-size: $size-1rem-by-Marie-Pierre-Lessard;
+    color: $clr-font-root-by-Marie-Pierre-Lessard;
+    background-color: $clr-bg-root-by-Marie-Pierre-Lessard;
+}
+
+/* Putting these CSS declarations in main.scss saves the time that would be required 
+to give a class to each image component. (Since HTML elements have the lowest specificity, different properties 
+can be given to specific (groups of) images as needed.) */
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* #endregion Library styling (applied globally) */
+
+/* #region Project-specific styling goes here (overriding or completing library styling) */
+
+/* @font-face at-rules don't have to be in the library-styling section 
+even though one would think that the font has to be set before the :root styling,
+which uses the font using a SCSS variable. 
+(I thought that since CSS files are read from top to bottom, but this sequence also works.)
+
+Reminder: the font set here is used in variables.module.scss! */
+/* Alternative to the @font-face at-rule: import a Google font, such as: 
+@import url('https://fonts.googleapis.com/css2?family=Limelight&family=Linden+Hill:ital@0;1&display=swap');
+
+Font weights 
+The numerical values are as follows: 
+•  100 – Thin 
+•  200 – Extra Light (Ultra Light) 
+•  300 – Light 
+•  400 – Normal 
+•  500 – Medium 
+•  600 – Semi Bold (Demi Bold) 
+•  700 – Bold 
+•  800 – Extra Bold (Ultra Bold) 
+•  900 – Black (Heavy) 
+https://www.udacity.com/blog/2021/01/html-css-font-weight.html  
+*/
+
+/* src is not a property. It is a CSS descriptor of the @font-face at-rule. */
+@font-face {
+    font-family: "Limelight";
+    src: url(./assets/fonts/limelight/Limelight-Regular.ttf) format("truetype");
+    font-display: swap;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Linden Hill Regular";
+    src: url(./assets/fonts/linden-hill/LindenHill-Regular.ttf) format("truetype");
+    font-display: swap;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Linden Hill Italic";
+    src: url(./assets/fonts/linden-hill/LindenHill-Italic.ttf) format("truetype");
+    font-display: swap;
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* #endregion Project-specific styling */

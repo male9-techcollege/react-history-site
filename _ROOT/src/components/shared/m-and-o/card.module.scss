@@ -1,0 +1,99 @@
+/* Source of library styling, incl. course notes:
+react-gallery-wrapper
+*/
+
+@use "../../../styles/variables.module.scss" as *;
+@use "../../../styles/mixins.module.scss" as *;
+
+/* IMPORTANT NOTE: 
+Cards have their own flex-container declarations because the general-use, higher-level containers in 
+atoms/flex-container.module.scss 
+have margins, which cards should not have since they are normally inside of a container with multiple cards in them,
+and that container typically has the necessary margins, padding, and gaps.
+*/
+
+/* TO DO LATER, maybe in a diff. project: 
+The following is project-specific rather than library styling, I think, because of the padding in the cards.
+(In this exercise, the cards only contain text, not pictures that fill the whole width.) 
+When displaying images, e.g. in a gallery, padding is optional because the cards don't have to be spaced out,
+and images can go in a flex container or grid with gaps and/or what I call a passe-partout (as in a picture frame).
+The library cards should either be without padding or exist in multiple versions. */
+.responsiveFlexedCardByMariePierreLessard {
+    @include flexContainerMobilesWRegGapAndCenteringByMariePierreLessard;
+    padding: $size-reg-spacing-by-Marie-Pierre-Lessard;
+    background-color: $clr-bg-card-by-Marie-Pierre-Lessard;
+
+    /* This is to position the footer at the bottom.
+    The article doesn't necessarily have a size compared to the anchor parent. */
+    position: relative;
+    /* This is to make sure that the positioned footer's text and the pic don't overlap. 
+    This overrides the padding declaration above. */
+    padding-bottom: 5.5rem;
+
+    .bodyTextByMariePierreLessard,
+    div {
+        text-align: initial;
+
+        img {
+            display: block;
+            justify-self: center;
+            max-width: 40%;
+            max-height: 40%;
+            object-fit: contain;
+        }
+    }
+
+    footer,
+    .footnoteByMariePierreLessard {
+        text-align: end;
+        position: absolute;
+        bottom: $size-reg-spacing-by-Marie-Pierre-Lessard;
+        right: $size-reg-spacing-by-Marie-Pierre-Lessard;
+    }
+}
+
+@media (min-width: 768px) {
+    .responsiveFlexedCardByMariePierreLessard {
+        @include flexContainerTabletsWRegGapAndCenteringByMariePierreLessard;
+    }
+}
+
+.unresponsiveFlexedCardAlwaysVerticalByMariePierreLessard {
+    @include flexContainerMobilesWRegGapAndCenteringByMariePierreLessard;
+    padding: $size-reg-spacing-by-Marie-Pierre-Lessard;
+    background-color: $clr-bg-card-by-Marie-Pierre-Lessard;
+
+    /* This is to position the footer at the bottom.
+    The article doesn't necessarily have a size compared to the anchor parent. */
+    position: relative;
+    /* This is to make sure that the positioned footer's text and the pic don't overlap. 
+    This overrides the padding declaration above. */
+    padding-bottom: 5.5rem;
+
+    /* .bodyTextByMariePierreLessard applies to the first row 
+    In the second row, I have to hit the same element with a HTML-element selector */
+    .bodyTextByMariePierreLessard,
+    div {
+        text-align: initial;
+
+        img {
+            display: block;
+            justify-self: center;
+            max-width: 40%;
+            max-height: 40%;
+            object-fit: contain;
+        }
+    }
+
+    /* I have to keep the footer selector because of the requirements of exercise 2.
+    Since CSS classes have a higher specificity, I can override it anyways
+    (for instance in order to put buttons in a grid). */
+    footer,
+    .footnoteByMariePierreLessard {
+        text-align: end;
+        position: absolute;
+        bottom: $size-reg-spacing-by-Marie-Pierre-Lessard;
+        right: $size-reg-spacing-by-Marie-Pierre-Lessard;
+    }
+}
+

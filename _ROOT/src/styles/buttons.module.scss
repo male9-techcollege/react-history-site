@@ -1,0 +1,38 @@
+/* Source of library styling, incl. course notes:
+react-gallery-wrapper
+*/
+
+/* LIBRARY STYLING ONLY -- PUT PROJECT-SPECIFIC STYLING IN OTHER FILES
+Reminder: this is the library file with initial sizes, rollover effects, etc. for buttons.
+This initial styling is about obtaining a minimum viable product (MVP) as fast as possible.
+This styling is meant to be overriden by project-specific styling in other files, for instance with CSS classes,
+which have a higher specificity than the HTML-element selector. */
+
+@use "./variables.module.scss" as *;
+
+button {
+    font-family: $font-fam-root-w-fallbacks-by-Marie-Pierre-Lessard;
+    font-size: $size-1rem-by-Marie-Pierre-Lessard;
+    color: $clr-font-root-by-Marie-Pierre-Lessard;
+    /* REMINDER: I need to include a border in the library if the button's background colour is the same as the root's,
+    otherwise the button is invisible! */
+    border: 1px solid $clr-font-root-by-Marie-Pierre-Lessard;
+    background-color: $clr-bg-btn-by-Marie-Pierre-Lessard;
+    
+    padding-inline: $size-1rem-by-Marie-Pierre-Lessard;
+    padding-block: $size-third-rem-by-Marie-Pierre-Lessard;
+    
+    &:hover {
+        font-weight: 700;
+        border: 2px solid $clr-font-root-by-Marie-Pierre-Lessard;
+    }
+    &:focus {
+        outline: 4px solid $clr-font-root-by-Marie-Pierre-Lessard;
+        outline-offset: 2px;
+        background-color: $clr-bg-btn-by-Marie-Pierre-Lessard;
+    }
+    &:active {
+        background-color: $clr-bg-btn-active-by-Marie-Pierre-Lessard;
+    }
+}
+

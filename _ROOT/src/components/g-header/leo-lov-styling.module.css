@@ -1,0 +1,545 @@
+/* For troubleshooting purposes:
+body * {
+    border: 1px solid red;
+}
+section,
+div {
+    border: 1px red solid;
+}
+*/
+
+/* ---------GLOBAL STYLING--------- */
+/* #region */
+
+@font-face {
+    font-family: Jura;
+    src: url(../../src/assets/fonts/Jura-VariableFont_wght.ttf) format('truetype');
+    font-display: swap;
+    font-weight: 300 700;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Teacher found this at https://getpublii.com/blog/one-line-css-solution-to-prevent-anchor-links-from-scrolling-behind-a-sticky-header.html */
+    /* This takes into account the fact that the burger menu is open. */
+    scroll-padding-top: 17.5rem;
+}
+
+@media (min-width: 768px) {
+    html {
+        scroll-padding-top: 3.5rem;
+    }
+}
+
+/* VARIABLES IN HTML: */
+:root {
+    /* Leo-Lov colours from specifications */
+    /* The Figma design contradicts the PDF file with the specifications. It uses another white: #fafafa 
+    Maybe TO DO: ask which specifications are correct */
+    --clr-white: #ffffff;
+    /* La Cuisine Fallback for hero pic and focus effects */
+    --clr-real-black: #000000;
+    /* Box shadow with 40% transparency (source: Figma design) */
+    --clr-real-black-transparent: #00000040;
+    /* Global footer, borders */
+    --clr-leo-purple: #2C3B6F;
+    /* At least one border, text of business name */
+    --clr-leo-blue: #002BC2;
+    /* My additions */
+    /* The grey for secondary nav's rollover effects had to be lighter than the box shadow
+    so that the latter would still be visible as subtle border. */
+    --clr-very-light-grey: #e2e2e2;
+    /* Experiments: 
+    #b2beeb approximately corresponds to #002BC240 without the transparency 
+    #bfc8e9 is a bit paler
+    --clr-leo-blue--light: #bfc8e9;
+    --clr-yellowish-beige: rgb(241, 228, 118);
+    */
+    --clr-beige: rgb(241, 216, 118);
+
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    /* Reminder: the font-family of buttons and inputs has to be set separately (also true for a text area, if any).
+    This styles the placeholders as well as the value of the inputs with types reset and submit. */
+    font-weight: 400;
+    color: var(--clr-real-black);
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+}
+
+button,
+input,
+textarea {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+}
+
+/* Thanks to the min-height, the text of a potential thank-you page doesn't look squished between the header and footer. */
+main {
+    min-height: 400px;
+}
+
+/* #endregion */
+
+/* Utility classes and typography */
+/* #region */
+h2 {
+    font-family: Jura, Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    font-weight: normal;
+    /* line-height: 1.5rem; */
+    color: var(--clr-leo-blue);
+}
+
+main h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: var(--clr-leo-blue);
+    margin-top: .6rem;
+}
+
+.leoBlueByMariePierreLessard {
+    color: var(--clr-leo-blue);
+}
+
+.aboutGridByMariePierreLessard p {
+    margin-top: 2rem;
+}
+
+/* To hide the text so that it can only be read by a screen reader */
+.sr-only {
+    display: none;
+}
+
+.noticesByMariePierreLessard {
+    width: 100%;
+}
+
+.thankYouByMariePierreLessard a,
+.copyrightNotice a,
+.validationNoticeByMariePierreLessard a {
+    color: var(--clr-light-aqua);
+}
+
+/* This is a p element */
+.validationNoticeByMariePierreLessard {
+    margin-block: 4px;
+}
+
+.thankYouByMariePierreLessard p:first-of-type {
+    margin-top: .1rem;
+}
+
+/* #endregion */
+
+/* ---------COMPONENT 1: basic composition (body, header, main with nav, footer, responsive grids)--------- */
+
+/* MAIN NAVIGATION MENU/NAV/RESPONSIVE NAV (with display: flex; and a burger icon that reveals a drop-down menu (with a transition/an animation)) */
+/* #region */
+
+/* ID styling is not overriden by a class styling such as .hidden-nav, so the nav bar cannot be given an ID if I want the burger-menu icon to work. Same thing with its parent.
+The navbar and its parent do need to have an ID, but not for styling purposes! Just for the JS. */
+.flyoutContainerByMariePierreLessard {
+    /* There has to be a background colour, otherwise it looks like sticky lettering without a box. */
+    background-color: var(--clr-white);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding-block: 1rem;
+    padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .flyoutContainerByMariePierreLessard {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+
+        flex-direction: row;
+    }
+}
+
+.navContainerByMariePierreLessard {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    order: 2;
+}
+
+/* mainNavByMariePierreLessard is a ul */
+.mainNavByMariePierreLessard {
+    display: flex;
+    flex-direction: column;
+    /* No gap between LIs in mobile view because I have a border instead of a background colour. */
+    /* gap: 4px; */
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    .navContainerByMariePierreLessard {
+        flex-direction: row;
+        justify-content: left;
+        gap: 0;
+        order: 1;
+    }
+
+    .mainNavByMariePierreLessard {
+        height: 50%;
+        align-self: end;
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.mainNavByMariePierreLessard li {
+    border-bottom: 1px solid var(--clr-leo-purple);
+}
+
+@media (min-width: 768px) {
+    .mainNavByMariePierreLessard li {
+        border-right: 1px solid var(--clr-leo-purple);
+    }
+
+    .mainNavByMariePierreLessard li:last-of-type {
+        border-right: none;
+    }
+}
+
+.mainNavByMariePierreLessard li:last-of-type {
+    border-bottom: none;
+}
+
+.flyoutContainerByMariePierreLessard a {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+}
+
+.mainNavByMariePierreLessard a {
+    /* I found the font size in Figma design */
+    font-size: .75rem;
+    color: var(--clr-leo-blue);
+    justify-self: left;
+}
+
+@media (min-width: 768px) {
+    .flyoutContainerByMariePierreLessard a {
+        padding: 0.3rem .4rem;
+    }
+
+    .mainNavByMariePierreLessard li {
+        border-bottom: none;
+    }
+}
+
+.navLogoByMariePierreLessard {
+    font-size: 2rem;
+    color: var(--clr-real-black);
+    font-family: Jura, Arial, Helvetica, sans-serif;
+    /* letter-spacing: .1rem; */
+    /* The radius is for rollover effects */
+    border-radius: 8px;
+    order: 1;
+}
+
+@media (min-width: 768px) {
+    .navLogoByMariePierreLessard {
+        align-self: end;
+        order: 2;
+    }
+}
+
+/* #endregion */
+
+
+/* WRAPPERS/MARGINS */
+/* #region */
+
+.wrapperByMariePierreLessard {
+    max-width: 1300px;
+    margin: auto;
+}
+
+.secondaryWrapperByMariePierreLessard {
+    margin-inline: 1rem;
+}
+
+/* #endregion */
+
+/* REST OF MAIN */
+/* Grids */
+/* #region */
+.aboutGridByMariePierreLessard {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+    padding: 1rem;
+    margin-block: 4rem;
+    background-color: var(--clr-leo-purple);
+}
+
+@media (min-width: 1024px) {
+    .aboutGridByMariePierreLessard {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+    }
+}
+
+.aboutGridByMariePierreLessard>div {
+    padding-block: 4rem;
+    padding-inline: 3rem;
+    background-color: var(--clr-white);
+}
+
+/* #endregion */
+
+/* FOOTER */
+/* #region */
+.globalFooterByMariePierreLessard {
+    background-color: var(--clr-leo-purple);
+    color: var(--clr-white);
+    margin-top: 5rem;
+    padding-block: 4rem;
+    justify-items: center;
+}
+
+.globalFooterByMariePierreLessard h2 {
+    color: var(--clr-white);
+}
+
+.footerGridByMariePierreLessard {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+    gap: 4rem;
+    padding-block: 1rem;
+    padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .footerGridByMariePierreLessard {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+    }
+}
+
+.gFooterInfoGridByMariePierreLessard {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.soMeGridByMariePierreLessard {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.footerGridByMariePierreLessard ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* This is UL element */
+.someNavByMariePierreLessard {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    /* This is to send the ul as a whole to the bottom of the cell. */
+    align-content: flex-end;
+}
+
+.someNavByMariePierreLessard img {
+    height: 4rem;
+}
+
+/* This is to avoid side-scroll */
+@media (min-width: 768px) {
+    .someNavByMariePierreLessard img {
+        height: 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .someNavByMariePierreLessard img {
+        height: 4rem;
+    }
+}
+
+.someNavByMariePierreLessard a {
+    display: block;
+    padding-top: .3rem;
+}
+
+.gFooterInfoGridByMariePierreLessard a {
+    color: var(--clr-white);
+    border-radius: 2px;
+}
+
+/* I have to give a border radius to these SVGs on top of the parent link, otherwise I can't see the border radius. */
+.someNavByMariePierreLessard a,
+.someNavByMariePierreLessard a svg {
+    border-radius: 2px;
+}
+
+.someNavByMariePierreLessard a svg {
+    stroke: var(--clr-white);
+}
+
+address {
+    font-style: normal;
+}
+
+/* #endregion */
+
+/* ---------COMPONENT 2: images, incl. icons--------- */
+/* #region */
+
+.aboutGridByMariePierreLessard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* #endregion */
+
+/* ---------COMPONENT 3: rollover effects/hover, focus and active effects--------- */
+/* #region */
+.navLogoByMariePierreLessard:hover {
+    background-color: var(--clr-beige);
+}
+
+.navLogoByMariePierreLessard:focus {
+    background-color: var(--clr-white);
+    outline: var(--clr-real-black) 2px solid;
+    outline-offset: -2px;
+}
+
+.navLogoByMariePierreLessard:active {
+    background-color: var(--clr-real-black-transparent);
+}
+
+.mainNavByMariePierreLessard a:hover {
+    background-color: var(--clr-beige);
+}
+
+.mainNavByMariePierreLessard a:focus {
+    text-decoration: underline;
+    /* The outline is partly disappearing because of overflow: hidden in the earlier, burger-menu version of this nav
+    acc. to https://stackoverflow.com/questions/46942026/adding-focus-and-override-on-css-outline-causes-outline-to-disappear 
+    Solution: a negative outline offset. 
+    
+    I might add a nav to this project later when we practice adding functions. */
+    outline: var(--clr-real-black) 2px solid;
+    outline-offset: -2px;
+}
+
+.mainNavByMariePierreLessard a:active {
+    color: var(--clr-white);
+    background-color: var(--clr-real-black-transparent);
+}
+
+.secondaryNavByMariePierreLessard li a:hover {
+    background-color: var(--clr-beige);
+}
+
+.secondaryNavByMariePierreLessard li a:focus {
+    background-color: var(--clr-white);
+    outline: var(--clr-real-black) 2px solid;
+    outline-offset: -2px;
+}
+
+.secondaryNavByMariePierreLessard li a:active {
+    background-color: var(--clr-very-light-grey);
+}
+
+.gFooterInfoGridByMariePierreLessard a:hover {
+    background-color: var(--clr-beige);
+    color: var(--clr-real-black);
+}
+
+.gFooterInfoGridByMariePierreLessard a:focus {
+    background-color: var(--clr-white);
+    color: var(--clr-real-black);
+    outline: var(--real-black) 2px solid;
+    outline-offset: 4px;
+}
+
+.gFooterInfoGridByMariePierreLessard a:active {
+    background-color: var(--clr-very-light-grey);
+}
+
+/* I had to mention the a, otherwise it didn't work! (Saying li:hover ~ <non-focusable or non-interactive element> doesn't work.) */
+.someNavByMariePierreLessard li:hover a>svg {
+    /* Transition creates a movement/a little animation, instead of an image that instantly gets bigger. */
+    transition: 300ms;
+    scale: 1.2;
+    background-color: var(--clr-beige);
+}
+
+.someNavByMariePierreLessard a:focus {
+    background-color: var(--clr-white);
+}
+
+.someNavByMariePierreLessard a:focus svg path {
+    stroke: var(--clr-real-black);
+}
+
+.someNavByMariePierreLessard a:active {
+    scale: .8;
+    background-color: var(--clr-very-light-grey);
+}
+
+.thankYouByMariePierreLessard a:hover,
+.copyrightNoticeByMariePierreLessard a:hover {
+    color: var(--clr-pink);
+    text-decoration: underline;
+}
+
+.thankYouByMariePierreLessard a:focus,
+.copyrightNoticeByMariePierreLessard a:focus {
+    color: var(--clr-dark-aqua);
+    /* I tried with a bc, and I didn't like it */
+    text-decoration: underline;
+    outline: var(--clr-real-black) 2px solid;
+    outline-offset: 4px;
+}
+
+.thankYouByMariePierreLessard a:active,
+.copyrightNoticeByMariePierreLessard a:active {
+    color: var(--clr-blue);
+}
+
+.validationNoticeByMariePierreLessard a:hover>img {
+    /* Transition creates a movement/a little animation, instead of an image that instantly gets bigger. */
+    transition: 300ms;
+    scale: 1.1;
+}
+
+.validationNoticeByMariePierreLessard a:focus {
+    outline: var(--clr-real-black) 2px solid;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.validationNoticeByMariePierreLessard a:active {
+    scale: .8;
+}
+
+/* #endregion */

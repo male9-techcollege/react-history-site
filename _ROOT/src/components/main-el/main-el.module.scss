@@ -1,0 +1,20 @@
+/* Source of library styling, incl. course notes:
+react-gallery-wrapper
+*/
+
+@use "../../styles/variables.module.scss" as *;
+
+/* #region Library styling (basic) */
+.pageBasicsByMariePierreLessard {
+    min-height: $size-empty-page-by-Marie-Pierre-Lessard;
+    padding-top: $size-main-top-mg-by-Marie-Pierre-Lessard;
+    padding-bottom: $size-main-bottom-mg-by-Marie-Pierre-Lessard;
+}
+/* #endregion Library styling (basic) */
+
+/* #region Project-specific styling goes here (overriding library styling) */
+
+
+
+/* #endregion Project-specific styling */
+

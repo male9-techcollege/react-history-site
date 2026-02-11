@@ -1,0 +1,179 @@
+/* Source of library styling, incl. course notes:
+react-gallery-wrapper
+*/
+
+@use "sass:math";
+
+/* #region Source and notes on !default variables */
+/* About using !default variables to include fallback values in SCSS library 
+"Sass provides the !default flag. This assigns a value to a variable only if that variable isn’t defined or its value is null. 
+Otherwise, the existing value will be used. (...)
+Variables defined with !default can be configured when loading a module with the @use rule. Sass libraries often use !default 
+variables to allow their users to configure the library’s CSS. To load a module with configuration, write 
+@use <url>with (<variable>: <value>, <variable>: <value>). 
+The configured values will override the variables’ default values. Only variables written at the top level of the stylesheet 
+with a !default flag can be configured."
+https: //sass-lang.com/documentation/variables/
+
+In other words: 
+- I can make sure that I have a minimum viable product (MVP) in my assignment deliveries by setting default variables, 
+  whose value will never change and will remain in the so-called library file(s) (like this file) in every project. 
+  The point of the defaults is to provide initial styling to elements when a project is created, before project-specific
+  styling is applied.
+  Indeed, I considered updating variables in a template (library) file based on the requirements of every project, 
+  but this risks making the library less generally applicable (useable). Indeed, I am bound to copy a different project 
+  every time (not necessarily a centralised library/pool of snippets) based on design similarities.
+  The point of a library or template is to save time. If I am missing key key-value-pair declarations, e.g. for grids,
+  in the library, I am giving myself work for nothing.
+- If I didn't use default values (flagged with !default), I could simply override the library's initial/suggested values,
+  but I could forget that I need the two declarations, what each of them does, and end up with a less useable project
+  template/library. 
+- Moreover, if I deleted property-value pairs like 
+  grid-template-rows: <value>; 
+  in mixins (for instance) in order to specify the height of different grids in each project and each section of a project, 
+  (1) I could forget that this p-v pair is not in the mixin, omit or delete the p-v pair with project-specific or section-
+  specific styling, and then wonder why the layout looks a certain way, and 
+  (2) it could be extra time-consuming to get a minimum viable product each time because, in this case scenario, 
+  the height of the row could be required to control the size of pictures with the object-fit property.
+- When using library files with default values, I still need to remember that they need to be listed among the top imported/@used 
+  partials/modules (according to the following article, which is a bit dated since it uses the deprecated @import instead of
+  @use: https: //bajena3.medium.com/a-story-about-overriding-scss-variables-and-the-default-keyword-eace1de34631), 
+  but it might be less risky to use !default than to rely on regular overriding. I didn't check.  
+*/
+/* #endregion Source and notes on !default variables */
+
+/* #region Font families */
+//Cambria looks practically identical to Times New Roman. I think that Cochin looks a bit more modern.
+$font-fam-root-w-fallbacks-by-Marie-Pierre-Lessard: Cochin, Georgia, Cambria, Times, "Times New Roman", serif !default;
+
+// Project-specific font families go here
+/* I reverted to using Times New Roman because Cochin caused scroll on small mobiles, 
+but fixing that wasn't the point of the assignment.
+*/
+$font-fam-root-w-fallbacks-by-Marie-Pierre-Lessard: "Linden Hill Regular", "Times New Roman", Times, serif;
+$font-fam-heading-w-fallbacks-by-Marie-Pierre-Lessard: "Limelight", "Times New Roman", Times, serif;
+
+/* #endregion Font families */
+
+/* #region Colours */
+/* COLOURS */
+
+$clr-1-by-Marie-Pierre-Lessard: white !default; //Usually for background of body
+$clr-2-by-Marie-Pierre-Lessard: black !default; //Usually for most of the text
+$clr-3-by-Marie-Pierre-Lessard: antiquewhite !default;
+$clr-4-by-Marie-Pierre-Lessard: lightblue !default;
+$clr-5-by-Marie-Pierre-Lessard: lavender !default; // I also considered: peachpuff and burlywood
+$clr-warning-by-Marie-Pierre-Lessard: rgb(250, 173, 72) !default;
+
+// Project-specific colour palette goes here
+/* Dark theme */
+$clr-1-by-Marie-Pierre-Lessard: #151515; //Background of body and nav. Source: Figma + style guide
+$clr-2-by-Marie-Pierre-Lessard: #FFFFFF; //Most of the text. Source: Figma 
+$clr-3-by-Marie-Pierre-Lessard: #C7BD8D; // Nail heads and plate and nav text; timeline yellow. Source: Figma + style guide
+$clr-4-by-Marie-Pierre-Lessard: #695E48; // Plate border and triangles (rectangle positioned diagonally) in left and right top corners of header. Source: Figma + style guide
+$clr-5-by-Marie-Pierre-Lessard: #1F1F1F;  // Plate background. Source: Figma + style guide 
+$clr-6-by-Marie-Pierre-Lessard: #FFF5C2;  // Yellow for active nav items and selectable dates in h1. Source: Figma 
+/* Light theme */
+$clr-7-by-Marie-Pierre-Lessard: #F5F5F5; //Background of body and nav. Source: Figma + style guide
+$clr-8-by-Marie-Pierre-Lessard: #1F1F1F; //Most of the text. Source: Figma 
+$clr-9-by-Marie-Pierre-Lessard: #C7BD8D; // Nail heads; timeline yellow. Source: Figma + style guide
+$clr-10-by-Marie-Pierre-Lessard: #695E48; // Plate and nav text (also when nav item is active). Source: Figma + style guide
+$clr-11-by-Marie-Pierre-Lessard: #FFFFFF; // Plate background. Source: Figma 
+$clr-12-by-Marie-Pierre-Lessard: #FFE9BF;  // Triangles (rectangle positioned diagonally) in left and right top corners of header. Source: Figma+style guide
+
+$clr-warning-by-Marie-Pierre-Lessard: #D29E62; // Source: style guide, but not necessarily for warning purposes!
+
+/* For :root: font and background */
+$clr-font-root-by-Marie-Pierre-Lessard: $clr-2-by-Marie-Pierre-Lessard !default;
+$clr-bg-root-by-Marie-Pierre-Lessard: $clr-1-by-Marie-Pierre-Lessard !default; 
+
+// Project-specific styling for :root goes here
+
+
+
+/* Other backgrounds */
+$clr-bg-btn-by-Marie-Pierre-Lessard: $clr-bg-root-by-Marie-Pierre-Lessard !default;
+$clr-bg-btn-active-by-Marie-Pierre-Lessard: $clr-5-by-Marie-Pierre-Lessard !default;
+$clr-bg-globalheader-by-Marie-Pierre-Lessard: $clr-3-by-Marie-Pierre-Lessard !default;
+$clr-bg-mainnav-by-Marie-Pierre-Lessard: $clr-4-by-Marie-Pierre-Lessard !default;
+$clr-bg-globalfooter-by-Marie-Pierre-Lessard: $clr-3-by-Marie-Pierre-Lessard !default;
+$clr-bg-passe-partout-by-Marie-Pierre-Lessard: $clr-3-by-Marie-Pierre-Lessard !default;
+$clr-bg-card-by-Marie-Pierre-Lessard: $clr-1-by-Marie-Pierre-Lessard !default;
+
+// Project-specific colours for other backgrounds go here
+
+
+
+/* #endregion Colours */
+
+/* #region Sizes */
+/* SIZES */
+/* Sources: previous assignments
+I edited sizes that I defined in react-pros-and-cons and terningespil */
+
+$size-1rem-by-Marie-Pierre-Lessard: 16px !default; // Applied in scope of :root and more 
+
+// Project-specific size of 1 rem goes here, so that the calculations below can be performed
+
+$size-1rem-by-Marie-Pierre-Lessard: 20px; // Applied in scope of :root and more 
+
+/* #region Calculations (proportions based on the above) -- LIBRARY VARIABLES ONLY */
+/* DO NOT EDIT THESE LIBRARY VARIABLES (names or math) */
+$size-sixthx5-rem-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard * 0.833;
+$size-fourthx3-rem-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard * 0.75;
+$size-thirdx2-rem-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard * 0.666;
+$size-1rem-on-gr-by-Marie-Pierre-Lessard: math.div($size-1rem-by-Marie-Pierre-Lessard, 1.618); //Close to 2/3 rem
+//@debug $size-1rem-on-gr-by-Marie-Pierre-Lessard;
+$size-half-rem-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard * 0.5;  
+$size-third-rem-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard * 0.333;
+$size-fourth-rem-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard * 0.25;
+$size-sixth-rem-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard * 0.166; // For typographic margins
+
+$size-gr-rem-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard * 1.618;
+$size-sixthx5-rem-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard * 0.833;
+$size-fourthx3-gr-rem-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard * 0.75; // 3/4 of golden ratio = approx. 1.2 rem 
+$size-thirdx2-gr-rem-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard * 0.666;
+$size-half-gr-rem-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard * 0.5; // 1/2 of golden ratio = approx. 0.8 rem
+$size-third-gr-rem-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard * 0.333; // 0.538794 rem
+$size-fourth-gr-rem-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard * 0.25; // 1/4 of golden ratio = approx. 0.4 rem
+$size-sixth-gr-rem-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard * 0.166; // For typographic margins
+
+$size-2rem-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard * 2;
+
+$size-gr-squared-rem-by-Marie-Pierre-Lessard: math.pow(1.618, 2) * $size-1rem-by-Marie-Pierre-Lessard; //1.618*1.618=2.617924
+//@debug $size-gr-squared-rem-by-Marie-Pierre-Lessard;
+$size-sixth-gr-squared-rem-by-Marie-Pierre-Lessard: math.pow(1.618, 2) * $size-1rem-by-Marie-Pierre-Lessard * 0.167; // For typographic margins
+
+$size-3rem-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard * 3;
+$size-grx2-rem-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard * 2; //3.236
+$size-gr-cubed-rem-by-Marie-Pierre-Lessard: math.pow(1.618, 3) * $size-1rem-by-Marie-Pierre-Lessard; //4.235801032
+$size-grx3-rem-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard * 3; //5.235848
+$size-grx4-rem-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard * 4; 
+$size-grx5-rem-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard * 5; 
+/* #endregion Calculations (proportions only, based on the above) */
+
+/* #region Negative space */
+/* #region BOTH VERTICAL AND HORIZONTAL */
+$size-small-spacing-by-Marie-Pierre-Lessard: $size-1rem-on-gr-by-Marie-Pierre-Lessard !default;  
+$size-medium-spacing-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard !default;  
+$size-large-spacing-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard !default;  
+/* Regular (most commonly used) spacing */
+$size-reg-spacing-by-Marie-Pierre-Lessard: $size-small-spacing-by-Marie-Pierre-Lessard !default; // E.g. for gaps in navs, grids, flex containers, ...
+/* #endregion BOTH VERTICAL AND HORIZONTAL */
+/* VERTICAL */
+$size-minimum-dev-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard !default; // Applied during development (testing, placeholders)
+$size-empty-page-by-Marie-Pierre-Lessard: 400px !default; // Min. height applied to <main> 
+$size-main-top-mg-by-Marie-Pierre-Lessard: $size-gr-rem-by-Marie-Pierre-Lessard !default; // Under nav/header 
+$size-main-bottom-mg-by-Marie-Pierre-Lessard: $size-gr-squared-rem-by-Marie-Pierre-Lessard !default; // Above global footer 
+/* HORIZONTAL */
+$size-primary-wrapper-by-Marie-Pierre-Lessard: 1300px !default;
+$size-secondary-wrapper-by-Marie-Pierre-Lessard: $size-1rem-by-Marie-Pierre-Lessard !default;
+
+// Project-specific sizes for negative space go here 
+
+
+
+/* #endregion Negative space */
+
+
+/* #endregion Sizes */

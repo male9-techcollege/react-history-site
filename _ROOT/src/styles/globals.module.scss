@@ -1,0 +1,49 @@
+/* Source of library styling, incl. course notes:
+react-gallery-wrapper
+*/
+
+@use "./variables.module.scss" as *;
+
+/* #region REASON FOR CREATING A MODULE FOR GLOBAL STYLES */
+/* REASON FOR CREATING A MODULE FOR GLOBAL STYLES:
+Global styles are supposed to go in main.scss, at least in theory! However, it doesn't seem to be possible 
+to both import styles from a SCSS module and from main.scss (or App.scss for that matter)
+inside of the same prop. Since it is not possible to turn App.scss or main.scss into modules
+(see notes about my fruitless attempts to rename these files in folder react-pros-and-cons),
+I have to put certain globally used classes in a file called *.module.scss.
+
+Based on the text editor's error messages, I think that SCSS modules are processed as ES modules,
+and that the name given after the word import (in the destination file) is the name of an object, 
+whose properties are accessible through dot notation. SCSS namespaces aren't exactly that since variables 
+and mixins don't need to be exported in order to be used in another file with the @use rule. 
+
+Reason for that conclusion: writing 
+    import name from "./App.scss";
+in the destination file throws an error that indicates that 
+    name 
+is supposed to be a default export. That is the syntax required with ES modules.
+*/
+/* #endregion */
+
+/* #region Library styling  */
+/* #region Valid declarations in practically all projects */
+/* For main element and usually children of global header and footer and nav element 
+I considered adding a secondary-wrapper mixin here, but this would not work will all designs, particularly in the header. 
+In a template, it's more flexible to have a secondary-wrapper class. */
+.wrapperByMariePierreLessard {
+    max-width: $size-primary-wrapper-by-Marie-Pierre-Lessard;
+    margin-inline: auto;
+}
+
+/* For anything that is not supposed to be wall-to-wall on small view ports */
+.secondaryWrapperByMariePierreLessard {
+    padding-inline: $size-secondary-wrapper-by-Marie-Pierre-Lessard;
+}
+/* #endregion Valid declarations in practically all projects */
+/* #endregion Library styling */
+
+/* Project-specific styling; note: there is currently no centering in section Library styling */
+.centeredSelfByMariePierreLessard {
+    justify-self: center;
+}
+

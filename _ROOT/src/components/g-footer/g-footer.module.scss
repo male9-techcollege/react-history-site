@@ -1,0 +1,25 @@
+/* Source of library styling, incl. course notes:
+react-gallery-wrapper
+*/
+
+@use "../../styles/variables.module.scss" as *;
+
+/* #region Library styling (basic) */
+.gFooterByMariePierreLessard {
+    background-color: $clr-bg-globalfooter-by-Marie-Pierre-Lessard;
+    min-height: $size-minimum-dev-by-Marie-Pierre-Lessard;
+}
+/* #endregion Library styling (basic) */
+
+/* #region Project-specific styling goes here (overriding library styling) */
+
+.gFooterByMariePierreLessard {
+    background-color: $clr-5-by-Marie-Pierre-Lessard;
+
+    a {
+        color: $clr-2-by-Marie-Pierre-Lessard;
+    }
+}
+
+/* #endregion Project-specific styling */
+
