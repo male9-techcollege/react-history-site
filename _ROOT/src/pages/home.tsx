@@ -2,6 +2,7 @@
 react-router-codealong-med-kasper
 react-wallywood-codealong-med-kasper (useFetch)
 */
+import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router";
 import type { TodaysData } from "../types/today";
 import { useFetch } from "../hooks/useFetch";
@@ -28,26 +29,73 @@ export const TodayByMariePierreLessard = () => {
     /* Giving a type to the custom hook is necessary, at least in this case, otherwise there is a type error
     indicating that data is of type never, etc., when the map method is applied to it. 
     */
-    /* In this project, I used the sample JSON files provided by MuffinLabs to create a file for the types
+
+    /* With the following without header, I get a type error in the console,
+    but also a CORS error under Network: Cross-Origin Resource Sharing Error: MissingAllowOriginHeader  
+    and
+    "Request URL
+    http://history.muffinlabs.com/date
+    Request Method
+    GET
+    Status Code
+    302 Found
+    Referrer Policy
+    strict-origin-when-cross-origin"
+    (Note the status code, which indicates a redirection: 302 Found)
+
+    "Temporary Redirects: 302, 303, and 307
+    The 302, 303, and 307 status codes indicate that a resource is temporarily available under a new URL, meaning that the redirect has a limited life span and (typically) should not be cached. An example is a website that is undergoing maintenance and redirects visitors to a temporary “Under Construction” page."
+    https://www.drlinkcheck.com/blog/http-redirects-301-302-303-307-308
+
+    After I added the header (found at https://github.com/muffinista/really-simple-history-api/blob/main/public/api.js), 
+    I got the CORS error: Cross-Origin Resource Sharing Error: PreflightDisallowedRedirect 
+   
+    
+    */
+    const [data, setData] = useState();
+    useEffect(() => {
+        fetch("http://history.muffinlabs.com/date", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+        })
+            .then(res => res.json())
+            .then(data => setData(data))
+    }, []);
+    console.log(data);
+
+    /* TO DO edit if this was wrong
+    In this project, I used the sample JSON files provided by MuffinLabs to create a file for the types
     with Paste JSON as Code (Refresh). There was no need to fetch and copy that from Dev Tools. 
     
     In the Wallywood code-along, Kasper used:
     useFetch<MovieData>
     and
     useFetch<Array<MovieData>>
+    They both worked, but this strategy doesn't work with the payload sent by MuffinLabs.
 
-    What is returned by MuffinLabs is NOT an array, at least not for today's date. It's a single object with more objects;
-    arrays are not at the first level. 
-    */
+    What is returned by MuffinLabs is NOT an array, at least not for today's date. It's a single object with key-value pairs
+    with values of different types at the first level. Arrays are at the 3rd level.
+    
+    "TypeScript + React: Typing custom hooks with tuple types (...) 
+    Our code is very clear. It’s the types that are wrong. Because we’re not dealing with an array.
+    Let’s go for a different name: Tuple. While an array is a list of values that can be of any length, we know exactly how many values we get in a tuple. Usually, we also know the type of each element in a tuple.
+    So we shouldn’t return an array, but a tuple at useToggle. The problem: In JavaScript an array and a tuple are indistinguishable. In TypeScript’s type system, we can distinguish them. (...)
+    
+    "
+    https://oida.dev/typescript-react-typeing-custom-hooks/
+
     const { data, isLoading, error } = useFetch<TodaysData>(
         "http://history.muffinlabs.com/date"
     );
 
     console.log("data", data);
+    */
 
     /* Alternatively: 
     if (isLoading)
-    */
+
+
     if (isLoading === true) {
         return <h1>Loading data...</h1>
     };
@@ -56,6 +104,7 @@ export const TodayByMariePierreLessard = () => {
         return <h1>Error: {error}</h1>
     };
 
+    */
     return (
         <>
             {/* TO DO : this class is temporary
