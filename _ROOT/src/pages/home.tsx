@@ -61,12 +61,12 @@ export const TodayByMariePierreLessard = () => {
     (Note that http was used instead of https in the above.)
     */
 
-   /* This works: */
-   const { data, isLoading, error } = useFetch<TodayMuffinLabs>(
-       "https://history.muffinlabs.com/date"
+    /* This works: */
+    const { data, isLoading, error } = useFetch<TodayMuffinLabs>(
+        "https://history.muffinlabs.com/date"
     );
     // console.log("MuffinLabs data: ", data);
-    
+
     /* According to the instructions, we only have to display the Events part of the fetched data. */
     const eventArray = data?.data.Events;
 
@@ -186,48 +186,46 @@ console.log(data);
             <FlexContainerByMariePierreLessard className={flexcontainerstyling.unresponsiveFlexContainerWoPassePartoutAlwaysVerticalByMariePierreLessard}>
                 {eventArray?.map((tidbit) => {
                     return (
-                        <>
-                            <CardWithArticleByMariePierreLessard
-                                key={tidbit.text}
-                                className={gridstyling.unresponsiveGridWoPassePartoutByMariePierreLessard}
-                            >
-                                <HeadingElByMariePierreLessard
-                                    headingNr={2}
-                                    headingText={`Year: ${tidbit.year}`}
-                                />
-                                <CardBodyByMariePierreLessard
-                                    bodyContent={tidbit.text}
-                                />
-                                <CardFooterByMariePierreLessard>
-                                    {/* Some properties of the SVG needed to be renamed. */}
-                                    <svg
-                                        width="37"
-                                        height="37"
-                                        viewBox="0 0 37 37"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                    >
-                                        <rect width="37" height="37" fill="url(#pattern0_13_50)" />
-                                        <defs>
-                                            <pattern id="pattern0_13_50" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                                <use xlinkHref="#image0_13_50" transform="scale(0.01)" />
-                                            </pattern>
-                                            <image
-                                                id="image0_13_50"
-                                                width="100"
-                                                height="100"
-                                                preserveAspectRatio="none"
-                                                xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEFElEQVR4nO3cTYhVdRjH8b/mYsgXUBA36owIkUNZOYroSKLuckChF2cRbSZqEUQuUlCZlbiwGphBsVYtdCRcaVAKUdBMUQO16YVeqAgXgjD4ujF1+soDz+Lv4d57zr33nHPPrd8H7mJm7j3Pc+5zfudlMf8QREREREREREREREREREREpKOAR4CngZeAw8BJ4EPgHDDpPx8DDgDDwOPA/AL6mO/bHvZax7z2pPdiPZ0ADnmvT1nv4b8AWAG8AVwEbtG828AUcBBY00Yfa3wb077NZt3yfbB9WRG6DbATOA/cJ18zwL4syfEk7PPP5Om+79vOUHXAVuArivcLMNSgjyF/T9EscVtC1QCPAhPAv5RrElgS9bEEOFtyD3PAuH0HoQqADcDvdM5PwCp//dzBPuw72NDpYWwCbrRwRP0KfOpH+CngA7/DmQZutvBl/OavZt30mue8h1Pe0yd+yrNem3Ed2NipYfQ0kYzLHutdwOKU7c4D+oG3C7ggm2992+usVkovi4DtwHvAXxm3bwdGTygb8GqG5r4B9rbzPAFs9CO4neuTffYjYKCNPuyu7Tngywz1RkLZgEsNGroCvJx2BLZwevyuhWHMtDOIOr28CPzdoObFPOtlbapehM/Hdz4511wAjGY8t9t7jhT1lO13lpa6Wv4somZaQ3YBq2VvCbWHUi7+dqOxu4Q+7HRcy/Wia1dqIMYeyBoMpJSHNQ0kAvQ1GEhfKIEGEtFAqnfK6lNCNJCH6JQVUUISdMoKSkhMCUlQQoISElNCEpSQoITElJAEJSQoITElJEEJCUpITAlJUEKCEhJTQhKUkKCExJSQBCUkKCExJSRBCQlKSEwJSVBCghISU0ISlJCghMSUkAQlJCghMSUkQQkJSkhMCUlQQoISElNCEpSQoITElJAcE2KLBwC9wJPAoP+/4ADwGLCwrIFYLa854D0Mek+9aQscdO0/fQLLfbEwW5zmc+Aq6a4BXwBjwCvA2nYHYtvwbY35tq1Gmqve84Tvw/KuHAiw2leN+76F9ULq+RE4CqzPOhB7r3/GPpuHOd+nQ76PXTGQP3IcQj22YMz+un+Ft3wluiLN+b5WfiCCBlI1SkjFdMVAfvAFwkaAZ4GVwFJfH2uR32o+A7wAvOtrN94p4Mu649egd4DnvWav9zDPe1rpPVqv73vvlR/IbIbG7O7mTdvBFmssBV4HvqZ9NuDXbJst9rLK98WWFEwzG8rmR1kt94DT9pCVc71B4LMWBmGf2ZpzL9uAMw2WwZ3Ks14za/PerbFW1rqC6w4CH9eoHbO/Xch7EDV66fd9jv0D7CiybqOG1vu52J5kN5dcexmwxxc0G/fXqP9uWcm9bPb6x4EnyqwtIiIiIiIiIiIiIiIiIiIS/iceAP1cIbOOhpxVAAAAAElFTkSuQmCC"
-                                            />
-                                        </defs>
-                                    </svg>
-                                    <a href={tidbit.links[0].link} target="_blank" rel="noopener noreferrer">
-                                        Read more
-                                    </a>
-                                </CardFooterByMariePierreLessard>
-                            </CardWithArticleByMariePierreLessard>
-                        </>
+                        <CardWithArticleByMariePierreLessard
+                            key={tidbit.text}
+                            className={gridstyling.unresponsiveGridWoPassePartoutByMariePierreLessard}
+                        >
+                            <HeadingElByMariePierreLessard
+                                headingNr={2}
+                                headingText={`Year: ${tidbit.year}`}
+                            />
+                            <CardBodyByMariePierreLessard
+                                bodyContent={tidbit.text}
+                            />
+                            <CardFooterByMariePierreLessard>
+                                {/* Some properties of the SVG needed to be renamed. */}
+                                <svg
+                                    width="37"
+                                    height="37"
+                                    viewBox="0 0 37 37"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                >
+                                    <rect width="37" height="37" fill="url(#pattern0_13_50)" />
+                                    <defs>
+                                        <pattern id="pattern0_13_50" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlinkHref="#image0_13_50" transform="scale(0.01)" />
+                                        </pattern>
+                                        <image
+                                            id="image0_13_50"
+                                            width="100"
+                                            height="100"
+                                            preserveAspectRatio="none"
+                                            xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEFElEQVR4nO3cTYhVdRjH8b/mYsgXUBA36owIkUNZOYroSKLuckChF2cRbSZqEUQuUlCZlbiwGphBsVYtdCRcaVAKUdBMUQO16YVeqAgXgjD4ujF1+soDz+Lv4d57zr33nHPPrd8H7mJm7j3Pc+5zfudlMf8QREREREREREREREREREREpKOAR4CngZeAw8BJ4EPgHDDpPx8DDgDDwOPA/AL6mO/bHvZax7z2pPdiPZ0ADnmvT1nv4b8AWAG8AVwEbtG828AUcBBY00Yfa3wb077NZt3yfbB9WRG6DbATOA/cJ18zwL4syfEk7PPP5Om+79vOUHXAVuArivcLMNSgjyF/T9EscVtC1QCPAhPAv5RrElgS9bEEOFtyD3PAuH0HoQqADcDvdM5PwCp//dzBPuw72NDpYWwCbrRwRP0KfOpH+CngA7/DmQZutvBl/OavZt30mue8h1Pe0yd+yrNem3Ed2NipYfQ0kYzLHutdwOKU7c4D+oG3C7ggm2992+usVkovi4DtwHvAXxm3bwdGTygb8GqG5r4B9rbzPAFs9CO4neuTffYjYKCNPuyu7Tngywz1RkLZgEsNGroCvJx2BLZwevyuhWHMtDOIOr28CPzdoObFPOtlbapehM/Hdz4511wAjGY8t9t7jhT1lO13lpa6Wv4somZaQ3YBq2VvCbWHUi7+dqOxu4Q+7HRcy/Wia1dqIMYeyBoMpJSHNQ0kAvQ1GEhfKIEGEtFAqnfK6lNCNJCH6JQVUUISdMoKSkhMCUlQQoISElNCEpSQoITElJAEJSQoITElJEEJCUpITAlJUEKCEhJTQhKUkKCExJSQBCUkKCExJSRBCQlKSEwJSVBCghISU0ISlJCghMSUkAQlJCghMSUkQQkJSkhMCUlQQoISElNCEpSQoITElJAcE2KLBwC9wJPAoP+/4ADwGLCwrIFYLa854D0Mek+9aQscdO0/fQLLfbEwW5zmc+Aq6a4BXwBjwCvA2nYHYtvwbY35tq1Gmqve84Tvw/KuHAiw2leN+76F9ULq+RE4CqzPOhB7r3/GPpuHOd+nQ76PXTGQP3IcQj22YMz+un+Ft3wluiLN+b5WfiCCBlI1SkjFdMVAfvAFwkaAZ4GVwFJfH2uR32o+A7wAvOtrN94p4Mu649egd4DnvWav9zDPe1rpPVqv73vvlR/IbIbG7O7mTdvBFmssBV4HvqZ9NuDXbJst9rLK98WWFEwzG8rmR1kt94DT9pCVc71B4LMWBmGf2ZpzL9uAMw2WwZ3Ks14za/PerbFW1rqC6w4CH9eoHbO/Xch7EDV66fd9jv0D7CiybqOG1vu52J5kN5dcexmwxxc0G/fXqP9uWcm9bPb6x4EnyqwtIiIiIiIiIiIiIiIiIiIS/iceAP1cIbOOhpxVAAAAAElFTkSuQmCC"
+                                        />
+                                    </defs>
+                                </svg>
+                                <a href={tidbit.links[0].link} target="_blank" rel="noopener noreferrer">
+                                    Read more
+                                </a>
+                            </CardFooterByMariePierreLessard>
+                        </CardWithArticleByMariePierreLessard>
                     )
                 })}
             </FlexContainerByMariePierreLessard>

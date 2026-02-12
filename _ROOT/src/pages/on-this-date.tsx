@@ -1,7 +1,12 @@
 /* Source for the creation of pages:
 react-router-codealong-med-kasper
 */
+/* This page is based on the home page (see home.tsx).  */
+import { useState } from "react";
 import { useOutletContext } from "react-router";
+import type { OnGivenDateMuffinLabs } from "../types/ongivendate";
+import { useFetch } from "../hooks/useFetch";
+
 import gridstyling from "../components/shared/atoms/grid.module.scss";
 import imgstyling from "../components/shared/atoms/img-el.module.scss";
 
@@ -17,6 +22,30 @@ export const OnThisDateByMariePierreLessard = () => {
     I am guessing that the react-router people might prefer useOutletContext to always have the type any because it is
     a context that can pass a whole variety of props. The app is more future-proof that way... */
     const { activeNavItemByMariePierreLessard } = useOutletContext<any>();
+
+    const [month, setMonthByMariePierreLessard] = useState<number>(1);
+    const [day, setDayByMariePierreLessard] = useState<number>(1);
+
+    /* This works: */
+    const { data, isLoading, error } = useFetch<OnGivenDateMuffinLabs>(
+        `https://history.muffinlabs.com/date/${month}/${day}`
+    );
+    // console.log("MuffinLabs data: ", data);
+
+    /* According to the instructions, we only have to display the Events part of the fetched data. */
+    const eventArray = data?.data.Events;
+
+    /*  Alternatively:
+    if (isLoading) */
+
+    if (isLoading === true) {
+        return <h2>Loading data...</h2>
+    };
+
+    if (error) {
+        return <h2>Error: {error}</h2>
+    };
+
 
     return (
         <>
