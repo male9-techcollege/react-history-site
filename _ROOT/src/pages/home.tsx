@@ -1,6 +1,6 @@
 /* Source for the creation of pages:
 react-router-codealong-med-kasper
-react-wallywood-codealong-med-kasper (useFetch)
+react-wallywood-codealong-med-kasper (useFetch; mapping of elements inside of JSX template)
 */
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router";
@@ -57,21 +57,31 @@ export const TodayByMariePierreLessard = () => {
     );
 
     console.log("data", data);
+
+    (Note that http was used instead of https in the above.)
     */
 
-    /* Alternatively:
-    if (isLoading)
+   /* This works: */
+   const { data, isLoading, error } = useFetch<TodayMuffinLabs>(
+       "https://history.muffinlabs.com/date"
+    );
+    // console.log("MuffinLabs data: ", data);
+    
+    /* According to the instructions, we only have to display the Events part of the fetched data. */
+    const eventArray = data?.data.Events;
 
+    /*  Alternatively:
+    if (isLoading) */
 
     if (isLoading === true) {
-        return <h1>Loading data...</h1>
+        return <h2>Loading data...</h2>
     };
 
     if (error) {
-        return <h1>Error: {error}</h1>
+        return <h2>Error: {error}</h2>
     };
 
-2nd theory: it's not me, it's them:
+    /* 2nd theory: 
 With the following without header, I got a type error in the console,
 but also a CORS error under Network: Cross-Origin Resource Sharing Error: MissingAllowOriginHeader  
 and
@@ -104,6 +114,20 @@ useEffect(() => {
 }, []);
 console.log(data);
 
+Kasper Frydensberg wrote by email on 2026-02-12: 
+"Du skal bruge HTTPS for ikke at få CORS fejl. Det kan også ses i deres kode eksempel på API dokumentationen."
+Note: Actually, the documentation at https://history.muffinlabs.com/?utm_source=apislist.com says that the endpoints are
+http://history.muffinlabs.com/date
+and
+http://history.muffinlabs.com/date/2/14
+"https" is nowhere on the front page. However, it is true that the api.js file (https://history.muffinlabs.com/api.js)
+says: 
+host: "https://history.muffinlabs.com/"
+and 
+path = '/date'
+etc.
+
+Earlier research (it does reveal that the server tries to redirect from http://... to https://..., but I didn't guess that!):
 "What went wrong?
 The CORS request was responded to by the server with an HTTP redirect to a URL on a different origin than the original request, which is not permitted during CORS requests.
 For example, if the page https://service.tld/fetchdata were requested, and the HTTP response is "301 Moved Permanently", "307 Temporary Redirect", or "308 Permanent Redirect" with a Location of https://anotherservice.net/getdata, the CORS request will fail in this manner.
@@ -114,7 +138,7 @@ This lead me to check MuffinLabs' source, which is Wikipedia.
 "Announcement: The API Portal is shutting down in 2026."
 https://api.wikimedia.org/wiki/Feed_API/Reference/On_this_day#curl
 
-It works (and provides me with data with another structure than MuffinLabs), but it won't work forever!
+That API works (and provides me with data with another structure than MuffinLabs), but it won't work forever!
 "The Wikimedia Foundation has decided to shut down the API Portal wiki as part of a new strategy for Wikimedia APIs. We’re still working on exact plans and schedules, but here is a general idea of what to expect:
 Endpoints: api.wikimedia.org endpoints will continue to work as currently documented until at least June 2026. Starting in the second half of 2026, api.wikimedia.org endpoints will be migrated to new routes and eventually deprecated."
 https://api.wikimedia.org/wiki/Talk:Community#Announcement:_API_Portal_shutdown
@@ -131,22 +155,26 @@ deaths: Notable people who died on the given date
 holidays: Fixed holidays celebrated on the given date
 events: Events that occurred on the given date that are not included in another type"
 https://api.wikimedia.org/wiki/Feed_API/Reference/On_this_day
-*/
-    // #region JS to get today's date was suggested by Wikipedia 
-    let today = new Date();
-    let month = String(today.getMonth() + 1).padStart(2, "0");
-    console.log("Month: ", month);
-    let day = String(today.getDate()).padStart(2,"0");
-    console.log("Day: ", day);
-    // #endregion JS to get today's date was suggested by Wikipedia 
 
-    const [data, setData] = useState();
-    useEffect(() => {
-        fetch(`https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/selected/${month}/${day}`)
-            .then(res => res.json())
-            .then(data => setData(data))
-    }, []);
-    console.log(data);
+In other words, with Wikipedia, I need to use the following (all gives far too many hits) at the early stage of development:
+https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/selected/${month}/${day}
+
+// #region JS to get today's date was suggested by Wikipedia 
+let today = new Date();
+let month = String(today.getMonth() + 1).padStart(2, "0");
+console.log("Month: ", month);
+let day = String(today.getDate()).padStart(2,"0");
+console.log("Day: ", day);
+// #endregion JS to get today's date was suggested by Wikipedia 
+
+const [data, setData] = useState();
+useEffect(() => {
+    fetch(`https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/selected/${month}/${day}`)
+        .then(res => res.json())
+        .then(data => setData(data))
+}, []);
+console.log(data);
+*/
 
     return (
         <>
@@ -156,23 +184,52 @@ https://api.wikimedia.org/wiki/Feed_API/Reference/On_this_day
             The timeline (vertical line) has to have z-index 1
             and the horizontal lines a z-index of 2 to go over that vertical line */}
             <FlexContainerByMariePierreLessard className={flexcontainerstyling.unresponsiveFlexContainerWoPassePartoutAlwaysVerticalByMariePierreLessard}>
-
-                <CardWithArticleByMariePierreLessard
-                    className={gridstyling.unresponsiveGridWoPassePartoutByMariePierreLessard}
-                >
-                    <HeadingElByMariePierreLessard
-                        headingNr={2}
-                        headingText={"title, Placeholder"}
-                    />
-                    <CardBodyByMariePierreLessard
-                        bodyContent={"string, Placeholder"}
-                    />
-                    <CardFooterByMariePierreLessard>
-                        I need an icon  and a link here
-                    </CardFooterByMariePierreLessard>
-                </CardWithArticleByMariePierreLessard>
-
-
+                {eventArray?.map((tidbit) => {
+                    return (
+                        <>
+                            <CardWithArticleByMariePierreLessard
+                                key={tidbit.text}
+                                className={gridstyling.unresponsiveGridWoPassePartoutByMariePierreLessard}
+                            >
+                                <HeadingElByMariePierreLessard
+                                    headingNr={2}
+                                    headingText={`Year: ${tidbit.year}`}
+                                />
+                                <CardBodyByMariePierreLessard
+                                    bodyContent={tidbit.text}
+                                />
+                                <CardFooterByMariePierreLessard>
+                                    {/* Some properties of the SVG needed to be renamed. */}
+                                    <svg
+                                        width="37"
+                                        height="37"
+                                        viewBox="0 0 37 37"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                    >
+                                        <rect width="37" height="37" fill="url(#pattern0_13_50)" />
+                                        <defs>
+                                            <pattern id="pattern0_13_50" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                <use xlinkHref="#image0_13_50" transform="scale(0.01)" />
+                                            </pattern>
+                                            <image
+                                                id="image0_13_50"
+                                                width="100"
+                                                height="100"
+                                                preserveAspectRatio="none"
+                                                xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEFElEQVR4nO3cTYhVdRjH8b/mYsgXUBA36owIkUNZOYroSKLuckChF2cRbSZqEUQuUlCZlbiwGphBsVYtdCRcaVAKUdBMUQO16YVeqAgXgjD4ujF1+soDz+Lv4d57zr33nHPPrd8H7mJm7j3Pc+5zfudlMf8QREREREREREREREREREREpKOAR4CngZeAw8BJ4EPgHDDpPx8DDgDDwOPA/AL6mO/bHvZax7z2pPdiPZ0ADnmvT1nv4b8AWAG8AVwEbtG828AUcBBY00Yfa3wb077NZt3yfbB9WRG6DbATOA/cJ18zwL4syfEk7PPP5Om+79vOUHXAVuArivcLMNSgjyF/T9EscVtC1QCPAhPAv5RrElgS9bEEOFtyD3PAuH0HoQqADcDvdM5PwCp//dzBPuw72NDpYWwCbrRwRP0KfOpH+CngA7/DmQZutvBl/OavZt30mue8h1Pe0yd+yrNem3Ed2NipYfQ0kYzLHutdwOKU7c4D+oG3C7ggm2992+usVkovi4DtwHvAXxm3bwdGTygb8GqG5r4B9rbzPAFs9CO4neuTffYjYKCNPuyu7Tngywz1RkLZgEsNGroCvJx2BLZwevyuhWHMtDOIOr28CPzdoObFPOtlbapehM/Hdz4511wAjGY8t9t7jhT1lO13lpa6Wv4somZaQ3YBq2VvCbWHUi7+dqOxu4Q+7HRcy/Wia1dqIMYeyBoMpJSHNQ0kAvQ1GEhfKIEGEtFAqnfK6lNCNJCH6JQVUUISdMoKSkhMCUlQQoISElNCEpSQoITElJAEJSQoITElJEEJCUpITAlJUEKCEhJTQhKUkKCExJSQBCUkKCExJSRBCQlKSEwJSVBCghISU0ISlJCghMSUkAQlJCghMSUkQQkJSkhMCUlQQoISElNCEpSQoITElJAcE2KLBwC9wJPAoP+/4ADwGLCwrIFYLa854D0Mek+9aQscdO0/fQLLfbEwW5zmc+Aq6a4BXwBjwCvA2nYHYtvwbY35tq1Gmqve84Tvw/KuHAiw2leN+76F9ULq+RE4CqzPOhB7r3/GPpuHOd+nQ76PXTGQP3IcQj22YMz+un+Ft3wluiLN+b5WfiCCBlI1SkjFdMVAfvAFwkaAZ4GVwFJfH2uR32o+A7wAvOtrN94p4Mu649egd4DnvWav9zDPe1rpPVqv73vvlR/IbIbG7O7mTdvBFmssBV4HvqZ9NuDXbJst9rLK98WWFEwzG8rmR1kt94DT9pCVc71B4LMWBmGf2ZpzL9uAMw2WwZ3Ks14za/PerbFW1rqC6w4CH9eoHbO/Xch7EDV66fd9jv0D7CiybqOG1vu52J5kN5dcexmwxxc0G/fXqP9uWcm9bPb6x4EnyqwtIiIiIiIiIiIiIiIiIiIS/iceAP1cIbOOhpxVAAAAAElFTkSuQmCC"
+                                            />
+                                        </defs>
+                                    </svg>
+                                    <a href={tidbit.links[0].link} target="_blank" rel="noopener noreferrer">
+                                        Read more
+                                    </a>
+                                </CardFooterByMariePierreLessard>
+                            </CardWithArticleByMariePierreLessard>
+                        </>
+                    )
+                })}
             </FlexContainerByMariePierreLessard>
         </>
     );
