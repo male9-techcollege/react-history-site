@@ -4,7 +4,6 @@ react-gallery-wrapper
 
 import type { Dispatch, SetStateAction } from "react";
 import { NavLink } from "react-router";
-import { HashLink } from "react-router-hash-link";
 import navstyling from "./main-nav.module.scss";
 
 /* Source of first note:
@@ -71,11 +70,11 @@ export const MainNavByMariePierreLessard = ({ setter }: mainNavInterfaceByMarieP
             <ul>
                 <li>
                     <NavLink
-                        to="/since"
-                        onClick={() => setter("Since")}
+                        to="/by-year"
+                        onClick={() => setter("By Year")}
                         className={({ isActive }) => (isActive ? `${navstyling.activeNavLinkByMariePierreLessard}` : "")}
                     >
-                        Since
+                        By Year
                     </NavLink>
                 </li>
                 <li>
@@ -105,29 +104,6 @@ export const MainNavByMariePierreLessard = ({ setter }: mainNavInterfaceByMarieP
                     >
                         By Date
                     </NavLink>
-                </li>
-                <li>
-                    {/* Anisul Islam advises on YouTube to install the Node package
-                    react-router-hash-link in order to navigate from one point of a page to the other.
-                    The component used then has to be HashLink, not NavLink. 
-                    With HashLink, the to= attribute is given the same value as with the corresponding HTML attribute: 
-                    to="#globalFooter" 
-                    Source: 
-                    https://www.youtube.com/watch?v=T54u2lIhmc0 
-
-                    "Install
-                    npm i react-router-hash-link
-                    This is a solution to React Router's issue of not scrolling to #hash-fragments when using the <Link> component to navigate. (...)
-                    Note that you must use React Router's BrowserRouter for this to work."
-                    https://www.npmjs.com/package/react-router-hash-link
-
-                    Error message in VSC:
-                    Could not find a declaration file for module 'react-router-hash-link'. 'c:/2025/TC/erhvervsfag/github/react-gallery-wrapper/_ROOT/node_modules/react-router-hash-link/dist/react-router-hash-link.cjs.js' implicitly has an 'any' type.
-                    Try `npm i --save-dev @types/react-router-hash-link` if it exists or add a new declaration (.d.ts) file containing `declare module 'react-router-hash-link';`
-                    */}
-                    <HashLink to="#top">
-                        Back to top
-                    </HashLink>
                 </li>
             </ul>
         </nav>

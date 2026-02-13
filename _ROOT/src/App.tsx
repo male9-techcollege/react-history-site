@@ -5,13 +5,13 @@ Opgavebeskrivelse:
 Byg en side der kan vise historiske begivenheder (events) igennem tidens løb. 
 Siden har følgende opgavekrav:
 FÆRDIG - Der skal optræde tre undersider styret med React Router
-- Der skal på "Today" siden hentes data for dagens dato
-- Der skal på "By Date" siden være mulighed for selv at indtaste en dato og dataen skal ændres til kun at vise begivenheder på denne dato
+FÆRDIG - Der skal på "Today" siden hentes data for dagens dato
+TO DO: TEST - Der skal på "By Date" siden være mulighed for selv at indtaste en dato og dataen skal ændres til kun at vise begivenheder på denne dato
 - Der skal på "Since" siden være mulighed for at vælge et årstal og alt data skal være fra dette år og fremefter
-- Der skal være mulighed for at skifte tema på siden
-- Der skal være mulighed for at trykke på "læs mere" knappen ud fra hver teaser tekst og dette link skal føre til den pågældende wikipedia artikel. 
-- Siden skal være semantisk korrekt 
-- Der skal også være et mobil design med tilhørende breakpoints. 
+TO DO (see react-wallywood-codealong) - Der skal være mulighed for at skifte tema på siden
+FÆRDIG - Der skal være mulighed for at trykke på "læs mere" knappen ud fra hver teaser tekst og dette link skal føre til den pågældende wikipedia artikel. 
+FÆRDIG - Siden skal være semantisk korrekt 
+FÆRDIG - Der skal også være et mobil design med tilhørende breakpoints. 
 - Designet skal følge det udleverede design
 OK - Styling skal foregå med enten SCSS modules eller styled components. 
 Bonus:
@@ -29,7 +29,7 @@ import "./App.scss";
 import { GlobalLayoutByMariePierreLessard } from "./layouts/global-layout";
 import { TodayByMariePierreLessard } from "./pages/home";
 import { OnThisDateByMariePierreLessard } from "./pages/on-this-date";
-import { SinceThatYearByMariePierreLessard } from "./pages/since-that-year";
+import { ThatYearByMariePierreLessard } from "./pages/that-year";
 import { ErrorPageByMariePierreLessard } from "./pages/notfound";
 
 /* Source for way to fold regions in .jsx files: https://stackoverflow.com/questions/58882591/region-for-jsx */
@@ -97,7 +97,7 @@ function App() {
                         */}
                         <Route index element={<TodayByMariePierreLessard />} />
                         <Route path="/by-date" element={<OnThisDateByMariePierreLessard />} />
-                        <Route path="/since" element={<SinceThatYearByMariePierreLessard />} />
+                        <Route path="/by-year" element={<ThatYearByMariePierreLessard />} />
                         {/* Fallback page, i.e. error 404 page (in case user enters wrong URL) 
 
                         The wildcard (*) means all paths. In previous versions of react-router, this path with a wildcard had to be listed

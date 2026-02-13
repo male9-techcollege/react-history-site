@@ -10,11 +10,32 @@ react-gallery-wrapper
     padding-top: $size-main-top-mg-by-Marie-Pierre-Lessard;
     padding-bottom: $size-main-bottom-mg-by-Marie-Pierre-Lessard;
 }
+
 /* #endregion Library styling (basic) */
 
 /* #region Project-specific styling goes here (overriding library styling) */
 
+.pageBasicsByMariePierreLessard {
+    /* This is to position the icons. */
+    position: relative;
 
+    /* This is a link with an SVG in it. 
+    The design says there should not be an arrow until large screens. Not very user-friendly!
+    It probably would look OK if this was over the nav on small(ish) screens. */
+    .upArrowByMariePierreLessard {
+        display: none;
+    }
+    
+    @media (min-width: 1440px) {
+        /* This is a link with an SVG in it. */
+        .upArrowByMariePierreLessard {
+            display: block;
+            position: fixed;
+            bottom: $size-secondary-wrapper-by-Marie-Pierre-Lessard;
+            right: $size-secondary-wrapper-by-Marie-Pierre-Lessard;
+            z-index: 1;
+        }
+    }
+}
 
 /* #endregion Project-specific styling */
-

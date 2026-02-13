@@ -1,0 +1,14 @@
+
+@use "../styles/variables.module.scss" as *;
+
+/* This applies the colour theme to the colour-theme-switch button itself (I was just following the instructions on Moodle). 
+*/
+.darkThemeBtnByMariePierreLessard {
+    border: none;
+    background-color: $clr-1-by-Marie-Pierre-Lessard;
+}
+
+.lightThemeBtnByMariePierreLessard {
+    border: none;
+    background-color: $clr-7-by-Marie-Pierre-Lessard;
+}

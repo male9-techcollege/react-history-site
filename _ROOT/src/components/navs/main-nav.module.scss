@@ -47,12 +47,12 @@ react-gallery-wrapper
 .mainNavByMariePierreLessard {
     position: sticky;
     top: 0;
-    z-index: 3; // 3 to go over positioned graphic elements of timeline (2 layers)
+    z-index: 2; // To go over positioned graphic elements of timeline and icons like up arrow
 
     background-color: $clr-1-by-Marie-Pierre-Lessard;
     border-bottom: 24px solid $clr-5-by-Marie-Pierre-Lessard;
     /* ATTENTION: read comment before changing min-height */
-    min-height: 3rem; // This height has to be sufficient for visited links to go up to the top of the nav, BUT just a bit: otherwise, one is tempted to click under the raised link, and then nothing happens because the mouse is not on the link! 
+    min-height: 4.05rem; // This height has to be sufficient for visited links to go up to the top of the nav, BUT just a bit: otherwise, one is tempted to click under the raised link, and then nothing happens because the mouse is not on the link! 
     padding: .5rem;
 
     ul {
@@ -63,6 +63,7 @@ react-gallery-wrapper
             display: flex;
 
             a {
+                text-transform: uppercase;
                 color: $clr-3-by-Marie-Pierre-Lessard;
                 text-decoration: none;
                 align-self: flex-end;
@@ -89,10 +90,6 @@ react-gallery-wrapper
             order: 3;
         }
 
-        li:last-of-type {
-            order: 4;
-        }
-
         @media (min-width: 1440px) {
             li:first-of-type {
                 order: 3;
@@ -104,10 +101,6 @@ react-gallery-wrapper
 
             li:nth-of-type(3) {
                 order: 1;
-            }
-
-            li:last-of-type {
-                order: 4;
             }
         }
     }

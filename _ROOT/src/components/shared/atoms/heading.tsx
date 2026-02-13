@@ -13,6 +13,7 @@ import type { HTMLAttributes } from "react";
 export interface headingElInterfaceByMariePierreLessard {
     headingNr: number;
     headingText: string;
+    children?: React.ReactNode;
 };
 
 type extendedGenericInterfaceForHeadingElByMariePierreLessard = HTMLAttributes<HTMLHeadingElement> & headingElInterfaceByMariePierreLessard;
@@ -22,7 +23,7 @@ og da opgaven kun krævede et element med props, dvs. et heading-element. Da de 
 skifter navn i instrukserne (selvom det ikke fungerer sådan i kodningen), tænkte jeg at navnet på komponenter nok ikke var
 særlig vigtigt! */
 export const HeadingElByMariePierreLessard = (
-    { headingNr, headingText, ...rest }:
+    { headingNr, headingText, children, ...rest }:
     extendedGenericInterfaceForHeadingElByMariePierreLessard)=> {
 
     // #region Sources and notes on experiments
@@ -75,27 +76,45 @@ export const HeadingElByMariePierreLessard = (
                 switch (headingNr) {
                     case 1:
                         return (
-                            <h1 {...rest}>{headingText}</h1>
+                            <h1 {...rest}>
+                                {headingText}
+                                {children}
+                            </h1>
                         );
                     case 2:
                         return (
-                            <h2 {...rest}>{headingText}</h2>
+                            <h2 {...rest}>
+                                {headingText}
+                                {children}
+                            </h2>
                         );
                     case 3:
                         return (
-                            <h3 {...rest}>{headingText}</h3>
+                            <h3 {...rest}>
+                                {headingText}
+                                {children}
+                            </h3>
                         );
                     case 4:
                         return (
-                            <h4 {...rest}>{headingText}</h4>
+                            <h4 {...rest}>
+                                {headingText}
+                                {children}
+                            </h4>
                         );
                     case 5:
                         return (
-                            <h5 {...rest}>{headingText}</h5>
+                            <h5 {...rest}>
+                                {headingText}
+                                {children}
+                            </h5>
                         );
                     case 6:
                         return (
-                            <h6 {...rest}>{headingText}</h6>
+                            <h6 {...rest}>
+                                {headingText}
+                                {children}
+                            </h6>
                         );
                     default:
                         return (

@@ -16,35 +16,6 @@ Reason: the containers below have margins, which cards should NOT have since the
 /* #region Library styling (basic, with or without responsiveness) */
 /* The classes below are an edited/expanded version of flex-container styling in assignment react-joke-fetcher */
 /* #region Without passe-partout */
-.responsiveFlexContainerWoPassePartoutWithUlByMariePierreLessard {
-    @include verticalListByMariePierreLessard;
-    margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
-
-    li {
-        max-width: 100%;
-    }
-}
-
-@media (min-width: 768px) {
-    .responsiveFlexContainerWoPassePartoutWithUlByMariePierreLessard {
-        @include horizontalListByMariePierreLessard;
-
-        li {
-            max-width: 50%;
-        }
-    }
-}
-
-@media (min-width: 1024px) {
-    .responsiveFlexContainerWoPassePartoutWithUlByMariePierreLessard {
-        @include horizontalListByMariePierreLessard;
-
-        li {
-            max-width: 33.333%;
-        }
-    }
-}
-
 .responsiveFlexContainerWoPassePartoutByMariePierreLessard {
     @include flexContainerMobilesWRegGapAndCenteringByMariePierreLessard;
     margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
@@ -60,22 +31,44 @@ Reason: the containers below have margins, which cards should NOT have since the
     @include flexContainerMobilesWRegGapAndCenteringByMariePierreLessard;
     margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
 }
-/* #endregion Without passe-partout */
 
-/* #region With passe-partout */
-.responsiveFlexContainerWPassePartoutWithUlByMariePierreLessard {
+.responsiveFlexContainerWoPassePartoutWithUlByMariePierreLessard {
     @include verticalListByMariePierreLessard;
-    margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
-    padding: $size-reg-spacing-by-Marie-Pierre-Lessard;
-    background-color: $clr-bg-passe-partout-by-Marie-Pierre-Lessard;
-}
+    @include flexContainerMobilesWRegGapAndCenteringByMariePierreLessard;
 
-@media (min-width: 768px) {
-    .responsiveFlexContainerWPassePartoutWithUlByMariePierreLessard {
-        @include horizontalListByMariePierreLessard;
+    li {
+        max-width: 100%;
     }
 }
 
+@media (min-width: 768px) {
+    .responsiveFlexContainerWoPassePartoutWithUlByMariePierreLessard {
+        @include horizontalListByMariePierreLessard;
+        @include flexContainerTabletsWRegGapAndCenteringByMariePierreLessard;
+
+        li {
+            max-width: 50%;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .responsiveFlexContainerWoPassePartoutWithUlByMariePierreLessard {
+        li {
+            max-width: 33.333%;
+        }
+    }
+}
+
+.unresponsiveFlexContainerWoPassePartoutWithUlAlwaysVerticalByMariePierreLessard {
+    @include verticalListByMariePierreLessard;
+    @include flexContainerMobilesWRegGapAndCenteringByMariePierreLessard;
+    margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
+}
+
+/* #endregion Without passe-partout */
+
+/* #region With passe-partout */
 .responsiveFlexContainerWPassePartoutByMariePierreLessard {
     @include flexContainerMobilesWRegGapAndCenteringByMariePierreLessard;
     padding: $size-reg-spacing-by-Marie-Pierre-Lessard;
@@ -93,11 +86,226 @@ Reason: the containers below have margins, which cards should NOT have since the
     padding: $size-reg-spacing-by-Marie-Pierre-Lessard;
     background-color: $clr-bg-passe-partout-by-Marie-Pierre-Lessard;
 }
+
+.responsiveFlexContainerWPassePartoutWithUlByMariePierreLessard {
+    @include verticalListByMariePierreLessard;
+    @include flexContainerMobilesWRegGapAndCenteringByMariePierreLessard;
+    margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
+    padding: $size-reg-spacing-by-Marie-Pierre-Lessard;
+    background-color: $clr-bg-passe-partout-by-Marie-Pierre-Lessard;
+}
+
+@media (min-width: 768px) {
+    .responsiveFlexContainerWPassePartoutWithUlByMariePierreLessard {
+        @include horizontalListByMariePierreLessard;
+        @include flexContainerTabletsWRegGapAndCenteringByMariePierreLessard;
+    }
+}
+
+.unresponsiveFlexContainerWPassePartoutWithUlAlwaysVerticalByMariePierreLessard {
+    @include verticalListByMariePierreLessard;
+    @include flexContainerMobilesWRegGapAndCenteringByMariePierreLessard;
+    margin-block: $size-reg-spacing-by-Marie-Pierre-Lessard;
+    padding: $size-reg-spacing-by-Marie-Pierre-Lessard;
+    background-color: $clr-bg-passe-partout-by-Marie-Pierre-Lessard;
+}
+
 /* #endregion With passe-partout */
 /* #endregion Library styling (basic, with or without responsiveness) */
 
 /* #region Project-specific styling goes here (overriding library styling) */
 
+.unresponsiveFlexContainerWoPassePartoutWithUlAlwaysVerticalByMariePierreLessard {
+    gap: 0; //Override
+    align-items: flex-end; //Override (sends to bottom; necessary, otherwise content is centered)
 
+    margin-top: 4rem;
+    padding-inline: 29px; //This is to position the yellow ball on top of the timeline and away from right margin on smaller devices.
+
+
+    .timelineItemByMariePierreLessard {
+        width: 100%; // To avoid collapse of empty children 
+        display: flex;
+        flex-direction: row;
+
+        /* The first card has no text ("empty"). It does have a SVG as a child: the sphere at the top of the timeline, 
+        which is positioned on top of the "empty" card.
+        It's easier to do it that way than to make the first text-filled card different than the others 
+        because another graphic element of the timeline has to be positioned over these other cards. */
+        .emptyCardByMariePierreLessard {
+            position: relative;
+
+            width: 100%;
+            height: 6rem;
+            border-right: 4px solid $clr-3-by-Marie-Pierre-Lessard;
+            padding-bottom: $size-grx2-rem-by-Marie-Pierre-Lessard;
+
+            /* Ball on top of timeline */
+            svg {
+                position: absolute;
+                top: -31px;
+                right: -31px;
+            }
+        }
+
+        /* This is based on unresponsiveGridWoPassePartoutByMariePierreLessard, which doesn't have enough columns, etc. */
+        .historyTidbitCardByMariePierreLessard {
+            position: relative;
+
+            width: 100%; //Necessary, otherwise cards with short text don't reach right edge, and border is offset.
+            display: flex;
+            flex-direction: column;
+            gap: $size-reg-spacing-by-Marie-Pierre-Lessard;
+
+            border-right: 4px solid $clr-3-by-Marie-Pierre-Lessard;
+            padding-bottom: $size-grx2-rem-by-Marie-Pierre-Lessard;
+
+            /* This is a SVG  */
+            .timelineArmByMariePierreLessard {
+                position: absolute;
+                top: 50px;
+                right: -21px;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                padding-right: $size-gr-rem-by-Marie-Pierre-Lessard;
+                align-content: end; //To send text close to timeline arm
+                text-align: right;
+                height: 50px;
+                font-size: $size-1rem-by-Marie-Pierre-Lessard;
+                text-transform: uppercase;
+            }
+
+            .historyTidbitBodyByMariePierreLessard {
+                padding-top: $size-thirdx2-gr-rem-by-Marie-Pierre-Lessard;
+                padding-right: $size-gr-squared-rem-by-Marie-Pierre-Lessard;
+                text-align: right;
+
+                footer {
+                    display: flex;
+                    flex-direction: row;
+                    gap: $size-reg-spacing-by-Marie-Pierre-Lessard;
+                    justify-content: right;
+                    align-items: center;
+
+                    a {
+                        color: $clr-2-by-Marie-Pierre-Lessard;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 425px) {
+    .unresponsiveFlexContainerWoPassePartoutWithUlAlwaysVerticalByMariePierreLessard {
+
+        .historyTidbitBodyByMariePierreLessard {
+            padding-right: $size-grx3-rem-by-Marie-Pierre-Lessard;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .unresponsiveFlexContainerWoPassePartoutWithUlAlwaysVerticalByMariePierreLessard {
+
+        /* Weirdly, the browser doesn't apply the padding unless I start using :nth-child here,
+        even though I don't to style the differently yet. */
+        .timelineItemByMariePierreLessard:nth-child(odd),
+        .timelineItemByMariePierreLessard:nth-child(even) {
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                padding-right: 6rem;
+            }
+    
+            .historyTidbitBodyByMariePierreLessard {
+                padding-right: 12rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 1440px) {
+    .unresponsiveFlexContainerWoPassePartoutWithUlAlwaysVerticalByMariePierreLessard {
+        padding-inline: 0px;
+
+
+        /* Weirdly, this is necessary to avoid a collapse of the empty card. */
+        .timelineItemByMariePierreLessard:nth-child(odd) {
+
+            /* Some of the styling of .emptyCardByMariePierreLessard, e.g. it's width, 
+            isn't applied unless I put it in this parent
+            with :nth-child(odd). */
+            .emptyCardByMariePierreLessard {
+                width: 50%;
+                border-right: 4px solid $clr-3-by-Marie-Pierre-Lessard;
+
+                svg {
+                    position: absolute;
+                    top: -31px;
+                    right: -31px;
+                }
+            }
+
+            .historyTidbitCardByMariePierreLessard {
+                width: 50%; //This has to be nested in :nth-child(odd) and :nth-child(even), otherwise it doesn't work.
+
+                /* This has to be nested, otherwise the padding is lost. */
+                .historyTidbitBodyByMariePierreLessard {
+                    padding-right: 12rem;
+                }
+            }
+        }
+
+        .timelineItemByMariePierreLessard:nth-child(even) {
+            justify-content: right;
+            padding-right: 8px; //This is to place the border in line with the border of cards that are justified to the left.
+
+            .historyTidbitCardByMariePierreLessard {
+                width: 50%; //This has to be nested in :nth-child(odd) and :nth-child(even), otherwise it doesn't work.
+                border-left: 4px solid $clr-3-by-Marie-Pierre-Lessard;
+                border-right: 0px solid $clr-3-by-Marie-Pierre-Lessard;
+
+                .timelineArmByMariePierreLessard {
+                    position: absolute;
+                    top: 50px;
+                    left: -21px;
+                    transform: rotate(180deg);
+                }
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                    padding-right: 0rem;
+                    padding-left: 6rem;
+                    text-align: left;
+                }
+
+                .historyTidbitBodyByMariePierreLessard {
+                    padding-right: 0rem;
+                    padding-left: 12rem;
+                    text-align: left;
+
+                    footer {
+                        justify-content: left;
+                    }
+                }
+            }
+        }
+    }
+}
 
 /* #endregion Project-specific styling */

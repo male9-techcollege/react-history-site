@@ -32,7 +32,8 @@ TO DO: the following is tablet-first not mobile-first due to measurements on Fig
 
 .gHeaderByMariePierreLessard {
     background-color: $clr-4-by-Marie-Pierre-Lessard;
-    min-height: 800px; // Override 
+    min-height: 100vh; // Override 
+    z-index: 2; //To go over the positioned icons inside of main
 
     .heroAreaByMariePierreLessard {
         /* The h1 is positioned absolutely over this background */
@@ -45,11 +46,11 @@ TO DO: the following is tablet-first not mobile-first due to measurements on Fig
         background-color: $clr-4-by-Marie-Pierre-Lessard;
 
         /* Since text inside section is positioned absolutely, the section collapses unless a height is set. */
-        height: 800px;
+        height: 100vh;
 
         hgroup {
-            height: 401px; // OK from 768px
-            width: 665px; // OK from 768px
+            height: 70vh;
+            width: 92%;
 
             /* With top: 25%; the top of the element is positioned n% away from the top.
             With bottom: 25%; the bottom of the element is positioned n% away from the bottom. */
@@ -62,64 +63,118 @@ TO DO: the following is tablet-first not mobile-first due to measurements on Fig
             border: 24px solid $clr-4-by-Marie-Pierre-Lessard;
             color: $clr-3-by-Marie-Pierre-Lessard;
 
-            /* Leo lov TO DO
-            */
-            padding-block: 0.4vw 0;
-            padding-inline: 1vw;
-
             h1 {
+                display: flex;
+                flex-direction: row;
+                justify-content: center; //I need both justify-content and text-align, probably because of the inputs
+                text-align: center;
+                text-transform: uppercase;
                 /* TO DO sizes */
                 /* letter-spacing: .1rem; */
                 font-size: 2.4rem; //Override 
                 line-height: 2.4rem;
-                margin-block-start: 100px; //Override
+                margin-block-start: 96px; //Override
                 margin-block-end: 0; //Override
-                margin-inline: 0;
-                text-align: center;
-            }
-
-            @media (min-width: 768px) {
-                h1 {
-                    font-size: 6vw; //Override 
-                    line-height: 6vw;
-                }
+                margin-inline: 1rem;
             }
 
             p {
                 text-align: center;
-                margin-block-start: 70px;
-                margin-inline: 130px;
+                margin-block-start: 40px;
+                margin-inline: 1rem;
             }
-        }
 
-        @media (min-width: 1440px) {
-            hgroup {
-                height: 452px; // OK from about 1440px
-                width: 1154px; // OK from about 1440px
+            svg:first-of-type {
+                position: absolute;
+                top: 24px;
+                left: 24px;
+            }
 
-                /* Tim says that it is better to use a position in % (e.g. bottom: -10%) or sth over 100% (e.g. top: 100%) 
-                than to set a fixed negative margin to place something partly outside of a container. The percentage is responsive. 
-                E.g of fixed negative margin: margin-top: -8rem; 
-                */
-                top: 55%;
-                transform: translateX(-50%) translateY(0%);
+            svg:nth-of-type(2) {
+                position: absolute;
+                top: 24px;
+                right: 24px;
+            }
+
+            svg:nth-of-type(3) {
+                position: absolute;
+                bottom: 24px;
+                left: 24px;
+            }
+
+            svg:last-of-type {
+                position: absolute;
+                bottom: 24px;
+                right: 24px;
+            }
+
+            input {
+                height: 2.4rem;
+                background-color: $clr-5-by-Marie-Pierre-Lessard;
+                color: $clr-3-by-Marie-Pierre-Lessard;
+                font-family: $font-fam-heading-w-fallbacks-by-Marie-Pierre-Lessard;
+                font-size: 2.4rem;
+                text-align: right;
+
+                border: none;
+            }
+
+            .inputByDateByMariePierreLessard {
+                width: 1.4em;
+            }
+
+            .inputByYearByMariePierreLessard {
+                width: 2.8em;
             }
         }
     }
 }
 
-// TO DO improve breakpoints to make this mobile-first
-// @media (min-width: 768px) {
-//     .gHeaderByMariePierreLessard {
+// TO DO improve breakpoints to make this mobile-first, also problems on very large screens
+@media (min-width: 768px) {
+    .gHeaderByMariePierreLessard {
+        min-height: 800px; // Override 
 
-//     }
-// }
+        .heroAreaByMariePierreLessard {
+            height: 800px;
 
-/* The margin of the global header creates the air between the offset title box and the nav
-Only exists on desktops */
+            hgroup {
+                height: 401px; // OK from 768px (about 50% of header and 60% of width of hgroup)
+                width: 665px; // OK from 768px (about 83% of header)
+
+                h1 {
+                    margin-block-start: 100px;
+                }
+
+                p {
+                    margin-block-start: 70px;
+                    margin-inline: 130px;
+                }
+            }
+        }
+    }
+}
+
 @media (min-width: 1440px) {
     .gHeaderByMariePierreLessard {
-        margin-bottom: 130px;
+        hgroup {
+            height: 452px; // OK from about 1440px
+            width: 1154px; // OK from about 1440px
+
+            /* Tim says that it is better to use a position in % (e.g. bottom: -10%) or sth over 100% (e.g. top: 100%) 
+                    than to set a fixed negative margin to place something partly outside of a container. The percentage is responsive. 
+                    E.g of fixed negative margin: margin-top: -8rem; 
+                    */
+            top: 55%;
+            transform: translateX(-50%) translateY(0%);
+        }
+
+        /* The empty div of the global header creates the air between the offset title box and the nav
+        on large devices */
+        .emptyDivByMariePierreLessard {
+            background-color: $clr-1-by-Marie-Pierre-Lessard;
+            height: 130px;
+        }
     }
 }
 

@@ -18,14 +18,12 @@ because the terms event_year and last_year are used, not by_year, for instance.
 react-router-codealong-med-kasper
 */
 import { useOutletContext } from "react-router";
+import { HashLink } from "react-router-hash-link";
 import gridstyling from "../components/shared/atoms/grid.module.scss";
-import imgstyling from "../components/shared/atoms/img-el.module.scss";
 
-import { SectionH1to2ByMariePierreLessard } from "../components/main-el/section-h1-2";
 import { GridByMariePierreLessard } from "../components/shared/atoms/grid";
-import { ImgComponentByMariePierreLessard } from "../components/shared/atoms/img-el";
 
-export const SinceThatYearByMariePierreLessard = () => {
+export const ThatYearByMariePierreLessard = () => {
 
     /* See notes and sources regarding useOutletContext in file global-layout.tsx 
     Interestingly, I get an error until I specify that the type of useOutletContext is any.
@@ -36,15 +34,9 @@ export const SinceThatYearByMariePierreLessard = () => {
 
     return (
         <>
-            <SectionH1to2ByMariePierreLessard
-                id={"since"}
-                h1={`${activeNavItemByMariePierreLessard}`}
-                h2={"What happened since a given year"}
-            >
-                <GridByMariePierreLessard className={gridstyling.responsiveGridWoPassePartoutByMariePierreLessard}>
-                    Placeholder
-                </GridByMariePierreLessard>
-            </SectionH1to2ByMariePierreLessard>
+            <GridByMariePierreLessard className={gridstyling.responsiveGridWoPassePartoutByMariePierreLessard}>
+                Placeholder
+            </GridByMariePierreLessard>
         </>
     );
 };
