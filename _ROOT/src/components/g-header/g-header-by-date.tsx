@@ -34,7 +34,7 @@ export const GlobalHeaderByDatePgByMariePierreLessard = (
         <>
             {/* Library header + Leo Lov header */}
             <header
-                className={headerstyling.gHeaderByMariePierreLessard}
+                {...rest}
             >
                 <div
                     className={`

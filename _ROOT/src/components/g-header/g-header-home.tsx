@@ -24,10 +24,12 @@ export const GlobalHeaderHomeByMariePierreLessard = (
     between the offset title box and the main navigation bar.
     Otherwise, there is an overlap. 
     */
+    {/* Library header + Leo Lov header */ }
     return (
         <>
             {/* Library header + Leo Lov header */}
-            <header className={headerstyling.gHeaderByMariePierreLessard}>
+
+            <header {...rest}>
                 <div
                     className={`
                         ${headerstyling.heroAreaByMariePierreLessard}

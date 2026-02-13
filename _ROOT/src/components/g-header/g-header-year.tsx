@@ -29,7 +29,9 @@ export const GlobalHeaderYearPgByMariePierreLessard = (
     return (
         <>
             {/* Library header + Leo Lov header */}
-            <header className={headerstyling.gHeaderByMariePierreLessard}>
+            <header 
+                {...rest}
+            >
                 <div
                     className={headerstyling.heroAreaByMariePierreLessard}
                 >

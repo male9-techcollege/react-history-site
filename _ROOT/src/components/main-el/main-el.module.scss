@@ -38,4 +38,35 @@ react-gallery-wrapper
     }
 }
 
+/* #region Light mode (on top of changing the name pageBasicsLightByMariePierreLessard, I added colour switches)
+I could do it faster by using the method that I used in react-pros-and-cons (), but we got instructions on Moodle about
+using useContext instead, so I am using that to show that I can make it work.
+Problem TO DO: :root is behind main and it still has a colour! */
+.pageBasicsLightByMariePierreLessard {
+    /* This is to position the icons. */
+    position: relative;
+    background-color: $clr-7-by-Marie-Pierre-Lessard;
+    color: $clr-8-by-Marie-Pierre-Lessard;
+
+    /* This is a link with an SVG in it. 
+    The design says there should not be an arrow until large screens. Not very user-friendly!
+    It probably would look OK if this was over the nav on small(ish) screens. */
+    .upArrowByMariePierreLessard {
+        display: none;
+    }
+
+    @media (min-width: 1440px) {
+
+        /* This is a link with an SVG in it. */
+        .upArrowByMariePierreLessard {
+            display: block;
+            position: fixed;
+            bottom: $size-secondary-wrapper-by-Marie-Pierre-Lessard;
+            right: $size-secondary-wrapper-by-Marie-Pierre-Lessard;
+            z-index: 1;
+        }
+    }
+}
+/* #endregion Light mode */
+
 /* #endregion Project-specific styling */

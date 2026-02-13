@@ -8,6 +8,8 @@ import { useState, useContext } from "react";
 import { Outlet } from "react-router";
 
 import sharedstyles from "../styles/globals.module.scss";
+import headerstyling from "../components/g-header/g-header.module.scss";
+// import navstyling from "../components/navs/main-nav.module.scss";
 import mainstyling from "../components/main-el/main-el.module.scss";
 import layoutstyling from "./global-layout.module.scss";
 
@@ -84,7 +86,13 @@ export const GlobalLayoutByMariePierreLessard = () => {
                 switch (activeNavItemByMariePierreLessard) {
                     case "Today":
                         return (
-                            <GlobalHeaderHomeByMariePierreLessard />
+                            <GlobalHeaderHomeByMariePierreLessard
+                                className={
+                                    isLightModeByMariePierreLessard
+                                        ? headerstyling.gHeaderLightByMariePierreLessard
+                                        : headerstyling.gHeaderByMariePierreLessard
+                                }
+                            />
                         );
                     case "By Date":
                         return (
@@ -93,6 +101,11 @@ export const GlobalLayoutByMariePierreLessard = () => {
                                 monthSetter={setMonthByMariePierreLessard}
                                 day={dayByMariePierreLessard}
                                 daySetter={setDayByMariePierreLessard}
+                                className={
+                                    isLightModeByMariePierreLessard
+                                        ? headerstyling.gHeaderLightByMariePierreLessard
+                                        : headerstyling.gHeaderByMariePierreLessard
+                                }
                             />
                         );
                     case "By Year":
@@ -100,11 +113,22 @@ export const GlobalLayoutByMariePierreLessard = () => {
                             <GlobalHeaderYearPgByMariePierreLessard
                                 year={yearByMariePierreLessard}
                                 yearSetter={setYearByMariePierreLessard}
+                                className={
+                                    isLightModeByMariePierreLessard
+                                        ? headerstyling.gHeaderLightByMariePierreLessard
+                                        : headerstyling.gHeaderByMariePierreLessard
+                                }
                             />
                         );
                     default:
                         return (
-                            <GlobalHeaderHomeByMariePierreLessard />
+                            <GlobalHeaderHomeByMariePierreLessard
+                                className={
+                                    isLightModeByMariePierreLessard
+                                        ? headerstyling.gHeaderLightByMariePierreLessard
+                                        : headerstyling.gHeaderByMariePierreLessard
+                                }
+                        />
                         );
                 };
             })()}
@@ -112,21 +136,27 @@ export const GlobalLayoutByMariePierreLessard = () => {
             <MainNavByMariePierreLessard
                 setter={setActiveNavItemByMariePierreLessard}
             />
+            {/* I am keeping the syntax for applying a conditional to only some class names even though 
+            changing the background colour of main isn't really the right solution here. It was hard to guess
+            how to write this, and it took a while. It works. */}
             <MainByMariePierreLessard
-                className={`
-                    ${sharedstyles.wrapperByMariePierreLessard} 
+                className={
+                    `${sharedstyles.wrapperByMariePierreLessard}  
                     ${sharedstyles.secondaryWrapperByMariePierreLessard} 
-                    ${mainstyling.pageBasicsByMariePierreLessard}
-                `}
+                    ${isLightModeByMariePierreLessard
+                        ? mainstyling.pageBasicsLightByMariePierreLessard
+                        : mainstyling.pageBasicsByMariePierreLessard
+                    }`
+                }  
             >
                 <ToggleBtnComponentByMariePierreLessard
                     type={"button"}
                     booleanState={isLightModeByMariePierreLessard}
                     toggleAction={changeColourThemeByMariePierreLessard}
                     className={
-                        isLightModeByMariePierreLessard  
-                        ? layoutstyling.lightThemeBtnByMariePierreLessard 
-                        : layoutstyling.darkThemeBtnByMariePierreLessard
+                        isLightModeByMariePierreLessard
+                            ? layoutstyling.lightThemeBtnByMariePierreLessard
+                            : layoutstyling.darkThemeBtnByMariePierreLessard
                     }
                 >
                     <svg
