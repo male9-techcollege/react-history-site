@@ -2,7 +2,7 @@
 Wallywood code-along dated 2026-02-02
 Instructions about useContext on Moodle */
 
-import { createContext, useState, type Dispatch, type SetStateAction } from "react";
+import { createContext, type Dispatch, type SetStateAction } from "react";
 
 // TS - interface til typer
 interface ThemeContextPropsByMariePierreLessard {

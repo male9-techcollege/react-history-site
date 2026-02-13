@@ -2,8 +2,7 @@
 react-router-codealong-med-kasper
 react-wallywood-codealong-med-kasper (useFetch; mapping of elements inside of JSX template)
 */
-import { placeholderTodayByMariePierreLessard } from "../TEMPORARY/sample-today";
-import { useState, useEffect } from "react";
+// import { placeholderTodayByMariePierreLessard } from "../TEMPORARY/sample-today";
 import { useOutletContext } from "react-router";
 import { HashLink } from "react-router-hash-link";
 import type { TodayMuffinLabs } from "../types/today";
@@ -11,12 +10,11 @@ import { useFetch } from "../hooks/useFetch";
 
 import mainstyling from "../components/main-el/main-el.module.scss";
 import flexcontainerstyling from "../components/shared/atoms/flex-container.module.scss";
-import gridstyling from "../components/shared/atoms/grid.module.scss";
 
 import { FlexContainerWithUlByMariePierreLessard } from "../components/shared/atoms/flex-container";
 import { CardWithArticleByMariePierreLessard } from "../components/shared/m-and-o/card";
 import { HeadingElByMariePierreLessard } from "../components/shared/atoms/heading";
-import { CardBodyByMariePierreLessard, CardFooterByMariePierreLessard } from "../components/shared/atoms/card-parts";
+import { CardBodyByMariePierreLessard } from "../components/shared/atoms/card-parts";
 
 export const TodayByMariePierreLessard = () => {
 
@@ -25,7 +23,7 @@ export const TodayByMariePierreLessard = () => {
     I tried with <string>, but it doesn't work, even though the only prop sent is typed as a string in global-layout.tsx. 
     I am guessing that the react-router people might prefer useOutletContext to always have the type any because it is
     a context that can pass a whole variety of props. The app is more future-proof that way... */
-    const { isLightModeByMariePierreLessard, activeNavItemByMariePierreLessard } = useOutletContext<any>();
+    const { isLightModeByMariePierreLessard } = useOutletContext<any>();
 
     /* Giving a type to the custom hook is necessary, at least in this case, otherwise there is a type error
     indicating that data is of type never, etc., when the map method is applied to it. 
@@ -177,9 +175,8 @@ useEffect(() => {
 console.log(data);
 */
 
-    /* TO DO delete or hide when done: 
-    also replace placeholderByMariePierreLessard by eventArrayByMariePierreLessard in the JSX template */
-    const placeholderByMariePierreLessard = placeholderTodayByMariePierreLessard?.data.Events;
+    /*     const placeholderByMariePierreLessard = placeholderTodayByMariePierreLessard?.data.Events;
+    */
 
     return (
         <>
@@ -198,7 +195,7 @@ console.log(data);
                     </CardWithArticleByMariePierreLessard>
                 </li>
 
-                {placeholderByMariePierreLessard?.map((tidbit) => {
+                {eventArrayByMariePierreLessard?.map((tidbit) => {
                     return (
                         <li
                             key={tidbit.text}

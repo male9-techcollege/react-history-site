@@ -17,8 +17,7 @@ because the terms event_year and last_year are used, not by_year, for instance.
 /* Source for the creation of pages:
 react-router-codealong-med-kasper
 */
-import { useOutletContext } from "react-router";
-import { HashLink } from "react-router-hash-link";
+// import { useOutletContext } from "react-router";
 import gridstyling from "../components/shared/atoms/grid.module.scss";
 
 import { GridByMariePierreLessard } from "../components/shared/atoms/grid";
@@ -30,7 +29,7 @@ export const ThatYearByMariePierreLessard = () => {
     I tried with <string>, but it doesn't work, even though the only prop sent is typed as a string in global-layout.tsx. 
     I am guessing that the react-router people might prefer useOutletContext to always have the type any because it is
     a context that can pass a whole variety of props. The app is more future-proof that way... */
-    const { isLightModeByMariePierreLessard, activeNavItemByMariePierreLessard } = useOutletContext<any>();
+    // TO DO unhide if I do that page: const { isLightModeByMariePierreLessard } = useOutletContext<any>();
 
     return (
         <>

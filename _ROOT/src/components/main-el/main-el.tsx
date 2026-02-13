@@ -2,7 +2,7 @@
 react-gallery-wrapper
 */
 
-import type { HTMLAttributes, Dispatch, SetStateAction } from "react";
+import type { HTMLAttributes } from "react";
 // This also works: import type { HTMLAttributes } from "../../../node_modules/@types/react/index";
 
 interface justChildrenByMariePierreLessard {

@@ -3,8 +3,6 @@ react-router-codealong-med-kasper
 */
 
 import { Link } from "react-router";
-/* The following module does style the h1 (no class name given) */
-import typography from "../styles/typography.module.scss";
 
 export const ErrorPageByMariePierreLessard = ()=> {
     return (

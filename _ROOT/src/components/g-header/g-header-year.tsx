@@ -6,7 +6,6 @@ react-leo-lov
 */
 import type { HTMLAttributes } from "react";
 
-import sharedstyles from "../../styles/globals.module.scss";
 import headerstyling from "./g-header.module.scss";
 
 import { HeadingElByMariePierreLessard } from "../shared/atoms/heading";

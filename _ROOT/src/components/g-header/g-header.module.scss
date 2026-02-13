@@ -12,6 +12,15 @@ react-gallery-wrapper
 
 /* #endregion Library styling (basic) */
 
+/* Copied and pasted from typography module */
+h1 {
+    font-family: $font-fam-heading-w-fallbacks-by-Marie-Pierre-Lessard;
+    font-size: $size-gr-squared-rem-by-Marie-Pierre-Lessard;
+    margin-block-start: $size-sixth-gr-squared-rem-by-Marie-Pierre-Lessard;
+    margin-block-end: $size-sixth-gr-squared-rem-by-Marie-Pierre-Lessard;
+    font-weight: 700;
+}
+
 /* #region Project-specific styling goes here (overriding library styling) */
 
 /* Calculations based on Figma layout

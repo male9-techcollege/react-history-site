@@ -113,6 +113,14 @@ Reason: the containers below have margins, which cards should NOT have since the
 /* #endregion With passe-partout */
 /* #endregion Library styling (basic, with or without responsiveness) */
 
+/* Copied and pasted from typography module */
+h2 {
+    font-size: $size-gr-rem-by-Marie-Pierre-Lessard;
+    margin-block-start: $size-sixth-gr-rem-by-Marie-Pierre-Lessard;
+    margin-block-end: $size-sixth-gr-rem-by-Marie-Pierre-Lessard;
+    font-weight: 700;
+}
+
 /* #region Project-specific styling goes here (overriding library styling) */
 
 .unresponsiveFlexContainerWoPassePartoutWithUlAlwaysVerticalByMariePierreLessard {

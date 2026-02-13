@@ -23,3 +23,9 @@ from the file App.scss. It is the global styles that are supposed to be declared
 
 
 /* #endregion Project-specific styling */
+
+/* Copied and pasted from typography module
+ */
+ small {
+     font-size: $size-1rem-on-gr-by-Marie-Pierre-Lessard;
+ }

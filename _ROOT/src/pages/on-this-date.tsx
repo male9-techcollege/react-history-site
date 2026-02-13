@@ -2,8 +2,7 @@
 react-router-codealong-med-kasper
 */
 /* This page is based on the home page (see home.tsx).  */
-import { placeholderByDateByMariePierreLessard } from "../TEMPORARY/sample-by-date";
-import { useState } from "react";
+// import { placeholderByDateByMariePierreLessard } from "../TEMPORARY/sample-by-date";
 import { useOutletContext } from "react-router";
 import { HashLink } from "react-router-hash-link";
 import type { OnGivenDateMuffinLabs } from "../types/ongivendate";
@@ -11,13 +10,11 @@ import { useFetch } from "../hooks/useFetch";
 
 import mainstyling from "../components/main-el/main-el.module.scss";
 import flexcontainerstyling from "../components/shared/atoms/flex-container.module.scss";
-import gridstyling from "../components/shared/atoms/grid.module.scss";
 
-import { ToggleBtnComponentByMariePierreLessard } from "../components/shared/atoms/btns";
 import { FlexContainerWithUlByMariePierreLessard } from "../components/shared/atoms/flex-container";
 import { CardWithArticleByMariePierreLessard } from "../components/shared/m-and-o/card";
 import { HeadingElByMariePierreLessard } from "../components/shared/atoms/heading";
-import { CardBodyByMariePierreLessard, CardFooterByMariePierreLessard } from "../components/shared/atoms/card-parts";
+import { CardBodyByMariePierreLessard } from "../components/shared/atoms/card-parts";
 
 
 export const OnThisDateByMariePierreLessard = () => {
@@ -27,7 +24,7 @@ export const OnThisDateByMariePierreLessard = () => {
     I tried with <string>, but it doesn't work, even though the only prop sent is typed as a string in global-layout.tsx. 
     I am guessing that the react-router people might prefer useOutletContext to always have the type any because it is
     a context that can pass a whole variety of props. The app is more future-proof that way... */
-    const { isLightModeByMariePierreLessard, activeNavItemByMariePierreLessard, monthByMariePierreLessard, dayByMariePierreLessard } = useOutletContext<any>();
+    const { isLightModeByMariePierreLessard, monthByMariePierreLessard, dayByMariePierreLessard } = useOutletContext<any>();
 
     /* This works: 
     */
@@ -44,18 +41,16 @@ export const OnThisDateByMariePierreLessard = () => {
     if (isLoading) 
     */
 
-    /* TO DO show this again when I have the Internet */
-    // if (isLoading === true) {
-    //     return <h2>Loading data...</h2>
-    // };
+    if (isLoading === true) {
+        return <h2>Loading data...</h2>
+    };
 
-    // if (error) {
-    //     return <h2>Error: {error}</h2>
-    // };
+    if (error) {
+        return <h2>Error: {error}</h2>
+    };
 
-    /* TO DO delete or hide when done: 
-    also replace placeholderByMariePierreLessard by eventArrayByMariePierreLessard in the JSX template */
-    const placeholderByMariePierreLessard = placeholderByDateByMariePierreLessard?.data.Events;
+    /*     const placeholderByMariePierreLessard = placeholderByDateByMariePierreLessard?.data.Events;
+    */
 
     return (
         <>
@@ -74,7 +69,7 @@ export const OnThisDateByMariePierreLessard = () => {
                     </CardWithArticleByMariePierreLessard>
                 </li>
 
-                {placeholderByMariePierreLessard?.map((tidbit) => {
+                {eventArrayByMariePierreLessard?.map((tidbit) => {
                     return (
                         <li
                             key={tidbit.text}
