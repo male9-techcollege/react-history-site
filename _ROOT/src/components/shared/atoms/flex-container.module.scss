@@ -193,8 +193,12 @@ Reason: the containers below have margins, which cards should NOT have since the
                     justify-content: right;
                     align-items: center;
 
-                    a {
+                    .darkThemeLink {
                         color: $clr-2-by-Marie-Pierre-Lessard;
+                    }
+
+                    .lightThemeLink {
+                        color: $clr-8-by-Marie-Pierre-Lessard;
                     }
                 }
             }

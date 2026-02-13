@@ -27,7 +27,7 @@ export const OnThisDateByMariePierreLessard = () => {
     I tried with <string>, but it doesn't work, even though the only prop sent is typed as a string in global-layout.tsx. 
     I am guessing that the react-router people might prefer useOutletContext to always have the type any because it is
     a context that can pass a whole variety of props. The app is more future-proof that way... */
-    const { activeNavItemByMariePierreLessard, monthByMariePierreLessard, dayByMariePierreLessard } = useOutletContext<any>();
+    const { isLightModeByMariePierreLessard, activeNavItemByMariePierreLessard, monthByMariePierreLessard, dayByMariePierreLessard } = useOutletContext<any>();
 
     /* This works: 
     */
@@ -123,7 +123,16 @@ export const OnThisDateByMariePierreLessard = () => {
                                                 />
                                             </defs>
                                         </svg>
-                                        <a href={tidbit.links[0].link} target="_blank" rel="noopener noreferrer">
+                                        <a 
+                                            href={tidbit.links[0].link} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className={
+                                                isLightModeByMariePierreLessard
+                                                    ? flexcontainerstyling.lightThemeLink
+                                                    : flexcontainerstyling.darkThemeLink
+                                            }  
+                                        >
                                             Read more
                                         </a>
                                     </footer>

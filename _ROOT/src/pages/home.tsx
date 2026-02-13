@@ -25,7 +25,7 @@ export const TodayByMariePierreLessard = () => {
     I tried with <string>, but it doesn't work, even though the only prop sent is typed as a string in global-layout.tsx. 
     I am guessing that the react-router people might prefer useOutletContext to always have the type any because it is
     a context that can pass a whole variety of props. The app is more future-proof that way... */
-    const { activeNavItemByMariePierreLessard } = useOutletContext<any>();
+    const { isLightModeByMariePierreLessard, activeNavItemByMariePierreLessard } = useOutletContext<any>();
 
     /* Giving a type to the custom hook is necessary, at least in this case, otherwise there is a type error
     indicating that data is of type never, etc., when the map method is applied to it. 
@@ -247,7 +247,16 @@ console.log(data);
                                                 />
                                             </defs>
                                         </svg>
-                                        <a href={tidbit.links[0].link} target="_blank" rel="noopener noreferrer">
+                                        <a 
+                                            href={tidbit.links[0].link} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className={
+                                                isLightModeByMariePierreLessard
+                                                    ? flexcontainerstyling.lightThemeLink
+                                                    : flexcontainerstyling.darkThemeLink
+                                            }  
+                                        >
                                             Read more
                                         </a>
                                     </footer>

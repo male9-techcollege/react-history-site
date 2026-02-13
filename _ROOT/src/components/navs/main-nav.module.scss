@@ -6,7 +6,8 @@ react-gallery-wrapper
 @use "../../styles/mixins.module.scss" as *;
 
 /* #region Library styling (very basic) */
-.mainNavByMariePierreLessard {
+.mainNavByMariePierreLessard,
+.mainNavLightByMariePierreLessard {
     background-color: $clr-bg-mainnav-by-Marie-Pierre-Lessard;
     min-height: $size-minimum-dev-by-Marie-Pierre-Lessard;
 
@@ -23,11 +24,11 @@ react-gallery-wrapper
             cursor: pointer;
         }
     }
-
 }
 
 @media (min-width: 768px) {
-    .mainNavByMariePierreLessard {
+    .mainNavByMariePierreLessard,
+    .mainNavLightByMariePierreLessard {
 
         ul {
             @include horizontalListByMariePierreLessard;
@@ -130,8 +131,72 @@ reference - https: //www.w3schools.com/cssref/sel_visited.asp"
 https: //teamtreehouse.com/community/my-css-textdecoration-is-not-working
 */
 .activeNavLinkByMariePierreLessard {
-    background-color: $clr-1-by-Marie-Pierre-Lessard; //Overriding successfully (not difficult)
+    background-color: transparent; //Overriding successfully (not difficult) TO DO: replace library colour by this
     font-weight: 700; //Displaying without a problem
 }
+
+/* #region Light mode - I changed the name of main nav and colours */
+.mainNavLightByMariePierreLessard {
+    position: sticky;
+    top: 0;
+    z-index: 2; // To go over positioned graphic elements of timeline and icons like up arrow
+
+    background-color: $clr-7-by-Marie-Pierre-Lessard;
+    border-bottom: 24px solid $clr-10-by-Marie-Pierre-Lessard;
+    /* ATTENTION: read comment before changing min-height */
+    min-height: 4.05rem; // This height has to be sufficient for visited links to go up to the top of the nav, BUT just a bit: otherwise, one is tempted to click under the raised link, and then nothing happens because the mouse is not on the link! 
+    padding: .5rem;
+
+    ul {
+        height: 100%; // This is to make visited links go up to the top of a container. 
+        align-items: stretch; //This affects the height of LIs, so that the a elements can go up and down.
+
+        li {
+            display: flex;
+
+            a {
+                text-transform: uppercase;
+                color: $clr-10-by-Marie-Pierre-Lessard;
+                text-decoration: none;
+                align-self: flex-end;
+            }
+
+            a:hover,
+            a:focus,
+            a:active {
+                align-self: flex-start;
+                text-decoration: underline;
+            }
+        }
+
+        /* I have to list them all, or the left-out LIs precede the LIs to which I gave an order property. */
+        li:first-of-type {
+            order: 1;
+        }
+
+        li:nth-of-type(2) {
+            order: 2;
+        }
+
+        li:nth-of-type(3) {
+            order: 3;
+        }
+
+        @media (min-width: 1440px) {
+            li:first-of-type {
+                order: 3;
+            }
+
+            li:nth-of-type(2) {
+                order: 2;
+            }
+
+            li:nth-of-type(3) {
+                order: 1;
+            }
+        }
+    }
+}
+/* #endregion Light mode */
 
 /* #endregion Project-specific styling */

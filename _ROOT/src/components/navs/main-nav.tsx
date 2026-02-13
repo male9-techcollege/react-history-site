@@ -1,7 +1,7 @@
 /* Source of library components, incl. course notes:
 react-gallery-wrapper
 */
-
+import type { HTMLAttributes } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import { NavLink } from "react-router";
 import navstyling from "./main-nav.module.scss";
@@ -42,7 +42,9 @@ interface mainNavInterfaceByMariePierreLessard {
     setter: Dispatch<SetStateAction<string>>;
 };
 
-export const MainNavByMariePierreLessard = ({ setter }: mainNavInterfaceByMariePierreLessard) => {
+type extendedGenericInterfaceForNavByMariePierreLessard = HTMLAttributes<HTMLElement> & mainNavInterfaceByMariePierreLessard;
+
+export const MainNavByMariePierreLessard = ({ setter, ...rest }: extendedGenericInterfaceForNavByMariePierreLessard) => {
 
     /* In the following nav, the setter prop of NavLink replaces the existing state by the text node of NavLink. */
     /* "The NavLink component builds upon Link by adding functionality to display the active link visually. It inherits 
@@ -66,7 +68,7 @@ export const MainNavByMariePierreLessard = ({ setter }: mainNavInterfaceByMarieP
     https://www.geeksforgeeks.org/reactjs/difference-between-navlink-an-link/
     */
     return (
-        <nav className={navstyling.mainNavByMariePierreLessard}>
+        <nav {...rest}>
             <ul>
                 <li>
                     <NavLink

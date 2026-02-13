@@ -9,7 +9,7 @@ import { Outlet } from "react-router";
 
 import sharedstyles from "../styles/globals.module.scss";
 import headerstyling from "../components/g-header/g-header.module.scss";
-// import navstyling from "../components/navs/main-nav.module.scss";
+import navstyling from "../components/navs/main-nav.module.scss";
 import mainstyling from "../components/main-el/main-el.module.scss";
 import layoutstyling from "./global-layout.module.scss";
 
@@ -128,64 +128,73 @@ export const GlobalLayoutByMariePierreLessard = () => {
                                         ? headerstyling.gHeaderLightByMariePierreLessard
                                         : headerstyling.gHeaderByMariePierreLessard
                                 }
-                        />
+                            />
                         );
                 };
             })()}
 
             <MainNavByMariePierreLessard
                 setter={setActiveNavItemByMariePierreLessard}
+                className={
+                    isLightModeByMariePierreLessard
+                        ? navstyling.mainNavLightByMariePierreLessard
+                        : navstyling.mainNavByMariePierreLessard
+                }
             />
             {/* I am keeping the syntax for applying a conditional to only some class names even though 
             changing the background colour of main isn't really the right solution here. It was hard to guess
             how to write this, and it took a while. It works. */}
-            <MainByMariePierreLessard
-                className={
-                    `${sharedstyles.wrapperByMariePierreLessard}  
+            <div className={isLightModeByMariePierreLessard
+                ? layoutstyling.backgroundOfMainLightByMariePierreLessard
+                : layoutstyling.backgroundOfMainDarkByMariePierreLessard}
+            >
+                <MainByMariePierreLessard
+                    className={
+                        `${sharedstyles.wrapperByMariePierreLessard}  
                     ${sharedstyles.secondaryWrapperByMariePierreLessard} 
                     ${isLightModeByMariePierreLessard
-                        ? mainstyling.pageBasicsLightByMariePierreLessard
-                        : mainstyling.pageBasicsByMariePierreLessard
-                    }`
-                }  
-            >
-                <ToggleBtnComponentByMariePierreLessard
-                    type={"button"}
-                    booleanState={isLightModeByMariePierreLessard}
-                    toggleAction={changeColourThemeByMariePierreLessard}
-                    className={
-                        isLightModeByMariePierreLessard
-                            ? layoutstyling.lightThemeBtnByMariePierreLessard
-                            : layoutstyling.darkThemeBtnByMariePierreLessard
+                            ? mainstyling.pageBasicsLightByMariePierreLessard
+                            : mainstyling.pageBasicsByMariePierreLessard
+                        }`
                     }
                 >
-                    <svg
-                        width="73"
-                        height="73"
-                        viewBox="0 0 73 73"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                    <ToggleBtnComponentByMariePierreLessard
+                        type={"button"}
+                        booleanState={isLightModeByMariePierreLessard}
+                        toggleAction={changeColourThemeByMariePierreLessard}
+                        className={
+                            isLightModeByMariePierreLessard
+                                ? layoutstyling.lightThemeBtnByMariePierreLessard
+                                : layoutstyling.darkThemeBtnByMariePierreLessard
+                        }
                     >
-                        <rect width="73" height="73" fill="url(#pattern0_18_304)" />
-                        <defs>
-                            <pattern id="pattern0_18_304" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                <use xlinkHref="#image0_18_304" transform="scale(0.01)" />
-                            </pattern>
-                            <image
-                                id="image0_18_304"
-                                width="100"
-                                height="100"
-                                preserveAspectRatio="none"
-                                xlinkHref="data:image/png;base64,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"
-                            />
-                        </defs>
-                    </svg>
-                </ToggleBtnComponentByMariePierreLessard>
+                        <svg
+                            width="73"
+                            height="73"
+                            viewBox="0 0 73 73"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                        >
+                            <rect width="73" height="73" fill="url(#pattern0_18_304)" />
+                            <defs>
+                                <pattern id="pattern0_18_304" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlinkHref="#image0_18_304" transform="scale(0.01)" />
+                                </pattern>
+                                <image
+                                    id="image0_18_304"
+                                    width="100"
+                                    height="100"
+                                    preserveAspectRatio="none"
+                                    xlinkHref="data:image/png;base64,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"
+                                />
+                            </defs>
+                        </svg>
+                    </ToggleBtnComponentByMariePierreLessard>
 
-                {/* The built-in Outlet component of react-router functions a bit like the {children} prop in a router. 
+                    {/* The built-in Outlet component of react-router functions a bit like the {children} prop in a router. 
                 (It is a descendant of BrowserRouter.) */}
-                {/* In order to pass a state the child component (page) represented by Outlet, it is necessary to 
+                    {/* In order to pass a state the child component (page) represented by Outlet, it is necessary to 
                 use the context prop of Outlet, which accepts a JS object (comma-separated list in curly brackets), 
                 as explained in the following source. 
                 "Because all of our routes (and components that make up those routes) are children of App, this means  
@@ -200,14 +209,16 @@ export const GlobalLayoutByMariePierreLessard = () => {
                 down from App, just the ones we need to make use of. (...) No more props drilling for us!"
                 https://medium.com/@jasen.miyamoto/learning-react-usecontext-and-useoutletcontext-abab8fa266bb
                 */}
-                <Outlet
-                    context={{
-                        activeNavItemByMariePierreLessard,
-                        monthByMariePierreLessard,
-                        dayByMariePierreLessard
-                    }}
-                />
-            </MainByMariePierreLessard>
+                    <Outlet
+                        context={{
+                            isLightModeByMariePierreLessard,
+                            activeNavItemByMariePierreLessard,
+                            monthByMariePierreLessard,
+                            dayByMariePierreLessard
+                        }}
+                    />
+                </MainByMariePierreLessard>
+            </div>
             <GlobalFooterByMariePierreLessard />
         </>
     );
